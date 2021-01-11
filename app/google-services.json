@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "386435062628",
+    "project_id": "psychology-95b39",
+    "storage_bucket": "psychology-95b39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386435062628:android:69187249a418fa2b357871",
+        "android_client_info": {
+          "package_name": "com.reyad.psychology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386435062628-pheetlo4i8bqdcc2id08isl498i15ai4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcNxGHpF2JvTqxzpqqSEtgOKZDPUseIgU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386435062628-pheetlo4i8bqdcc2id08isl498i15ai4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

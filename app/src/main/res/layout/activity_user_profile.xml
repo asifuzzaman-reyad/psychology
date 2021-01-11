@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".messenger.users.UserProfile">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#E3E6E1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/male_avatar" />
+
+
+    <TextView
+        android:id="@+id/tv_name_user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="@string/name"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/tv_id_user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/student_id"
+        android:textColor="@color/purple_500"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_batch_user_profile"
+        app:layout_constraintStart_toStartOf="@+id/tv_batch_user_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_batch_user_profile" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_batch_user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@color/teal_200"
+        android:padding="8dp"
+        android:hint="@string/batch"
+        android:textColor="#000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/tv_name_user_profile"
+        app:layout_constraintStart_toStartOf="@+id/tv_name_user_profile"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_user_profile" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_send_user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:backgroundTint="@android:color/holo_green_dark"
+        android:text="@string/send_friend_request"
+        android:textSize="17sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_id_user_profile" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_decline_user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="12dp"
+        android:text="@string/decline_friend_request"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:visibility="gone"
+        app:cornerRadius="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_send_user_profile"
+        app:layout_constraintStart_toStartOf="@+id/btn_send_user_profile"
+        app:layout_constraintTop_toBottomOf="@+id/btn_send_user_profile" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_Sent_message_user_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="12dp"
+        android:text="Send Message"
+        android:textAllCaps="false"
+        android:textSize="17sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_decline_user_profile"
+        app:layout_constraintStart_toStartOf="@+id/btn_decline_user_profile"
+        app:layout_constraintTop_toBottomOf="@+id/btn_decline_user_profile" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

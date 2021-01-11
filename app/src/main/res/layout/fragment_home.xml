@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dashboard.FragmentHome">
+
+    <!-- cardView header -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="#96E8F3"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <!-- textView psychology -->
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_black"
+                    android:text="@string/app_name"
+                    android:textColor="@android:color/black"
+                    android:textSize="24sp" />
+
+                <!-- textView cu -->
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_semibold"
+                    android:text="@string/cu" />
+
+            </LinearLayout>
+
+            <!-- profile image-->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/civ_profile_home"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:src="@drawable/male_avatar"
+                app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- button teacher-->
+    <Button
+        android:id="@+id/btn_teacher_home"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:text="Teacher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_student_home"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- button student-->
+    <Button
+        android:id="@+id/btn_student_home"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:text="Student"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_teacher_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_teacher_home"
+        app:layout_constraintTop_toTopOf="@+id/btn_teacher_home" />
+
+    <!-- button messenger-->
+    <Button
+        android:id="@+id/btn_messenger_home"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:layout_margin="16dp"
+        android:text="messenger"
+        app:layout_constraintEnd_toEndOf="@+id/btn_student_home"
+        app:layout_constraintStart_toStartOf="@+id/btn_student_home"
+        app:layout_constraintTop_toBottomOf="@+id/btn_student_home" />
+
+    <!-- button student-->
+    <Button
+        android:id="@+id/btn_routine_home"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
+        android:text="routine"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/btn_teacher_home"
+        app:layout_constraintStart_toStartOf="@+id/btn_teacher_home"
+        app:layout_constraintTop_toBottomOf="@+id/btn_teacher_home" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

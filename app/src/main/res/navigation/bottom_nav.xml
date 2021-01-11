@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav"
+    app:startDestination="@id/fragmentHome">
+
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.reyad.psychology.dashboard.FragmentHome"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_fragmentHome_to_teacherMain"
+            app:destination="@id/teacherMain" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentStudy2"
+        android:name="com.reyad.psychology.dashboard.FragmentStudy"
+        android:label="fragment_study2"
+        tools:layout="@layout/fragment_study2" >
+        <action
+            android:id="@+id/action_fragmentStudy2_to_courseList"
+            app:destination="@id/courseList" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseList"
+        android:name="com.reyad.psychology.dashboard.study.CourseList"
+        android:label="fragment_course_list"
+        tools:layout="@layout/fragment_course_list" >
+        <action
+            android:id="@+id/action_courseList_to_courseDetails"
+            app:destination="@id/courseDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/courseDetails"
+        android:name="com.reyad.psychology.dashboard.study.CourseDetails"
+        android:label="fragment_course_details"
+        tools:layout="@layout/fragment_course_details" />
+    <fragment
+        android:id="@+id/teacherMain"
+        android:name="com.reyad.psychology.dashboard.home.teacher.TeacherMain"
+        android:label="fragment_teacher_main"
+        tools:layout="@layout/fragment_teacher_main" >
+        <action
+            android:id="@+id/action_teacherMain_to_teacherDetails"
+            app:destination="@id/teacherDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherDetails"
+        android:name="com.reyad.psychology.dashboard.home.teacher.TeacherDetails"
+        android:label="TeacherDetails" />
+</navigation>

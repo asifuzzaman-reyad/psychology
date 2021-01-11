@@ -1,0 +1,79 @@
+<resources>
+    <string name="app_name">Psychology</string>
+
+    <!-- splash screen-->
+    <string name="psychology">Department of Psychology</string>
+    <string name="cu">University of Chittagong</string>
+
+    <!-- first activity-->
+    <string name="welcome">Welcome</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="login_now">Login now</string>
+    <string name="new_to_this_app">New to this app?</string>
+    <string name="create_new_account">Create new account</string>
+
+    <!-- sign up1-->
+    <string name="sign_up">Sign Up</string>
+    <string name="_1_2">1/2</string>
+    <string name="user_token">User Token(Collect from CR)</string>
+    <string name="batch">Batch</string>
+    <string name="student_id">Student ID</string>
+    <string name="hall">Hall</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="next">Next</string>
+
+    <!-- sign up2-->
+    <string name="_2_2">2/2</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+
+    <!-- login activity -->
+    <string name="remember_me">Remember Me</string>
+    <string name="forget_password">Forgot password</string>
+    <string name="login">Login</string>
+
+    <!-- profile activity -->
+    <string name="profile">Profile</string>
+    <string name="sign_out">Sign out</string>
+    <string name="student_name">Md. Asifuzzaman Reyad</string>
+    <string name="edit_profile">Edit Profile</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- bottom menu -->
+    <string name="home">Home</string>
+    <string name="study">Study</string>
+    <string name="notice">Notice</string>
+
+    <!-- study fragment-->
+    <string name="all_course">All Course</string>
+
+    <!-- course list fragment-->
+    <string name="basic">Basic</string>
+    <string name="syllabus">Syllabus</string>
+    <string name="questions">Questions</string>
+    <string name="pdf">Pdf</string>
+    <string name="notes">Notes</string>
+    <string name="books">Books</string>
+    <string name="teacher_s_slide">Teacher\'s Slide</string>
+    <string name="teacher_name1">Teacher Name1</string>
+    <string name="teacher_name2">Teacher Name2</string>
+
+    <!-- all user activity-->
+    <string name="all_user">All user</string>
+
+    <!-- user profile activity -->
+    <string name="name">Name</string>
+    <string name="send_friend_request">Send Friend Request</string>
+    <string name="decline_friend_request">Decline Friend Request</string>
+    <string name="seen">seen</string>
+
+
+    <string name="otp_code_text">code</string>
+    <string name="otp_verification_text">verification</string>
+    <string name="otp_description_text">One time password sent on</string>
+    <string name="verify_code">verify code</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="date_of_birth">Date of Birth</string>
+
+</resources>
