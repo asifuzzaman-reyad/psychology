@@ -17,7 +17,7 @@ import com.reyad.psychology.R
 import com.reyad.psychology.dashboard.home.student.StudentMain
 import com.reyad.psychology.databinding.FragmentHomeBinding
 import com.reyad.psychology.messenger.Messenger
-import com.reyad.psychology.register.ProfileActivity
+import com.reyad.psychology.register.DashboardActivity
 import com.squareup.picasso.Picasso
 
 class FragmentHome : Fragment() {
@@ -36,7 +36,7 @@ class FragmentHome : Fragment() {
 
         // button profile
         binding.civProfileHome.setOnClickListener {
-            val profileIntent = Intent(requireContext(), ProfileActivity::class.java).apply {
+            val profileIntent = Intent(requireContext(), DashboardActivity::class.java).apply {
                 putExtra("batch", batch.toString())
                 putExtra("id", id.toString())
             }

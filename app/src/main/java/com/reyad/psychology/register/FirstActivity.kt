@@ -37,16 +37,9 @@ class FirstActivity : AppCompatActivity() {
 
         //button create new acc
         binding.mBtnCreateFirst.setOnClickListener {
-            val register1Intent = Intent(this, SignUp1::class.java)
+            val register1Intent = Intent(this, SignUp::class.java)
             startActivity(register1Intent)
         }
-    }
-
-    // sent to main
-    private fun sendToMainActivity() {
-        val mainIntent = Intent(this, MainActivity::class.java)
-        startActivity(mainIntent)
-        finish()
     }
 
     // on start -> user checking
@@ -61,5 +54,12 @@ class FirstActivity : AppCompatActivity() {
             Log.d("firstActivity", "sign up first...")
         }
 //        updateUI(currentUser)
+    }
+
+    // sent to main
+    private fun sendToMainActivity() {
+        val mainIntent = Intent(this, MainActivity::class.java)
+        startActivity(mainIntent)
+        finish()
     }
 }

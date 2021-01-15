@@ -21,7 +21,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
-class ProfileActivity : AppCompatActivity() {
+class DashboardActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var mAuth: FirebaseAuth
@@ -99,7 +99,7 @@ class ProfileActivity : AppCompatActivity() {
 
         //database
         val db = FirebaseDatabase.getInstance().reference
-        val userRef = db.child("Users").child(uid!!)
+        val userRef = db.child("Users_Mobile").child(uid!!)
 
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

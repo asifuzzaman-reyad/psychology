@@ -2,6 +2,7 @@ package com.reyad.psychology.dashboard.study
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.reyad.psychology.R
+import com.reyad.psychology.dashboard.study.course.CourseActivity
 import com.reyad.psychology.databinding.FragmentCourseListBinding
 
 class CourseList : Fragment() {
@@ -45,7 +47,13 @@ class CourseList : Fragment() {
             findNavController().navigate(R.id.action_courseList_to_courseDetails)
             sendCourseListSharedPref(courseCode.toString(), "questions")
         }
-        binding.tvNotesCourseList.setOnClickListener { }
+        binding.tvNotesCourseList.setOnClickListener {
+            val intent = Intent(context, CourseActivity::class.java).apply {
+                putExtra("courseCode", courseCode.toString())
+                putExtra("path", "MyData")
+            }
+            startActivity(intent)
+        }
         binding.tvBooksCourseList.setOnClickListener { }
         binding.tvTeacher1CourseList.setOnClickListener { }
         binding.tvTeacher2CourseList.setOnClickListener { }

@@ -195,7 +195,7 @@ class ProfileEdit : AppCompatActivity() {
                 ).show()
 
                 // go back to profile
-                val profileIntent = Intent(this, ProfileActivity::class.java)
+                val profileIntent = Intent(this, DashboardActivity::class.java)
                 startActivity(profileIntent)
                 finish()
             }

@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.database.FirebaseDatabase
 import com.reyad.psychology.databinding.ActivityMobileSignIn2Binding
 import dmax.dialog.SpotsDialog
 import java.util.concurrent.TimeUnit
@@ -40,7 +41,7 @@ class MobileSignIn2 : AppCompatActivity() {
         //
         binding.btnMain2Verify.setOnClickListener {
             val code = binding.pinViewMain2.text.toString()
-            if (code.isNotEmpty()){
+            if (code.isNotEmpty()) {
                 verifyVerificationCode(code)
             }
         }
@@ -78,9 +79,12 @@ class MobileSignIn2 : AppCompatActivity() {
                     // set pin view
                     dialog?.dismiss()
                     binding.pinViewMain2.setText(code.toString())
-                }
-                else{
-                    Toast.makeText(this@MobileSignIn2, "Please enter verification code", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        this@MobileSignIn2,
+                        "Please enter verification code",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
@@ -99,16 +103,8 @@ class MobileSignIn2 : AppCompatActivity() {
         //creating the credential
         val credential = PhoneAuthProvider.getCredential(mVerificationId!!, code)
 
-        //signing the user
-        val batch = intent.getStringExtra("batch").toString()
-        val id = intent.getStringExtra("id").toString()
-        val intent = Intent(this, MobileSignIn3::class.java).apply {
-            putExtra("batch", batch)
-            putExtra("id", id)
-            putExtra("credential", credential)
-        }
-        startActivity(intent)
-//        signInWithPhoneAuthCredential(credential)
+        //
+        signInWithPhoneAuthCredential(credential)
     }
 
     //
@@ -122,13 +118,38 @@ class MobileSignIn2 : AppCompatActivity() {
                     Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
 
                     //
+                    //signing the user
                     val batch = intent.getStringExtra("batch").toString()
                     val id = intent.getStringExtra("id").toString()
-                    val intent = Intent(this, MobileSignIn3::class.java).apply {
-                        putExtra("batch", batch)
-                        putExtra("id", id)
-                    }
-                    startActivity(intent)
+                    val blood = intent.getStringExtra("blood").toString()
+                    val hall = intent.getStringExtra("hall").toString()
+                    val mobile = intent.getStringExtra("mobile").toString()
+                    val password = intent.getStringExtra("password").toString()
+
+                    //firebase auth + database
+                    val currentUser = FirebaseAuth.getInstance().currentUser!!.uid
+                    val usersRef = FirebaseDatabase.getInstance().getReference("Users_Mobile")
+
+                    // user auth
+                    val userHashMap: HashMap<Any, String> = HashMap()
+                    userHashMap["batch"] = batch
+                    userHashMap["id"] = id
+                    userHashMap["mobile"] = mobile
+                    userHashMap["password"] = password
+                    userHashMap["userId"] = currentUser
+
+                    // uidRef value
+                    usersRef.child(currentUser)
+                        .setValue(userHashMap)
+                        .addOnCompleteListener {
+                            //
+                            val intent = Intent(this, FirstActivity::class.java)
+                            startActivity(intent)
+                        }
+                        .addOnFailureListener {
+                            Toast.makeText(this, "Data upload failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                        }
+
                 } else {
                     Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show()
                 }
