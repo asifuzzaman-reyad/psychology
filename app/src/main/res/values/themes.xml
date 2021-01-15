@@ -4,8 +4,8 @@
     <style name="Theme.Psychology" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryVariant">@color/liteWhite</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
@@ -15,7 +15,7 @@
 
         <!-- Status bar color. -->
         <!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/design_default_color_secondary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">#D8D8D8</item>
 
         <!-- Customize font -> open sans -->
         <item name="android:textViewStyle">@style/customFont</item>

@@ -7,7 +7,6 @@
     tools:context=".dashboard.home.student.Batch13">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:paddingTop="8dp"
         android:id="@+id/recyclerView_batch_13"
         android:layout_width="0dp"
         android:layout_height="0dp"

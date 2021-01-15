@@ -123,7 +123,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/open_sans"
-                    android:hint="@string/mobile_no"
+                    android:hint="@string/pin"
                     android:inputType="number"
                     android:maxLength="11" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -136,6 +136,7 @@
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
                 app:errorEnabled="true"
+                android:visibility="gone"
                 app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -152,7 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:padding="12dp"
+                android:padding="8dp"
                 android:text="Sign In"
                 android:textSize="18sp" />
 

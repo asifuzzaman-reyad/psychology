@@ -16,9 +16,10 @@ import com.google.firebase.database.ValueEventListener
 import com.reyad.psychology.databinding.FragmentThirdBinding
 
 private const val TAG = "fragmentThird"
+
 class FragmentThird : Fragment() {
 
-    private var _binding: FragmentThirdBinding ? = null
+    private var _binding: FragmentThirdBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -38,30 +39,34 @@ class FragmentThird : Fragment() {
     private fun retrieveFriendList() {
         val friendListDatabase = FirebaseDatabase.getInstance().reference.child("Friend_List")
 
-        class FriendList(val date: String){
-            constructor(): this( "")
+        class FriendList(val date: String) {
+            constructor() : this("")
         }
 
         val mCurrentUser = FirebaseAuth.getInstance().uid
         Log.i(TAG, "currentUser: $mCurrentUser")
 
-        val friendList : ArrayList<FriendList> = ArrayList()
+        val friendList: ArrayList<FriendList> = ArrayList()
 
-        friendListDatabase.child(mCurrentUser.toString()).addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                val data = snapshot.getValue(FriendList::class.java)
-                friendList.add(data!!)
+        friendListDatabase.child(mCurrentUser.toString())
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
 
-                Log.i(TAG, "name: ${data.date}")
+                    if (snapshot.exists()) {
+                        val data = snapshot.getValue(FriendList::class.java)
+                        friendList.add(data!!)
+
+                        Log.i(TAG, "name: ${data.date}")
 
 //                val adapter = FriendListAdapter(this)
-            }
+                    }
+                }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
 
-        })
+            })
 
     }
 

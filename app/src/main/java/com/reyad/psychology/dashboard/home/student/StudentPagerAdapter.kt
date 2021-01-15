@@ -17,7 +17,7 @@ class StudentPagerAdapter(private val context: Context, fm: FragmentManager) :
         return fragmentList[position]
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    override fun getPageTitle(position: Int): CharSequence {
         return titleList[position]
     }
 

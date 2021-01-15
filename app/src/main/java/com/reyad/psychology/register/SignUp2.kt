@@ -2,7 +2,6 @@ package com.reyad.psychology.register
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
@@ -12,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.reyad.psychology.dashboard.MainActivity
 import com.reyad.psychology.databinding.ActivitySignUp2Binding
+import dmax.dialog.SpotsDialog
 
 private const val TAG = "sign up2"
 
@@ -22,7 +22,7 @@ class SignUp2 : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: FirebaseDatabase
 
-    private lateinit var progressBar: ProgressBar
+    private lateinit var dialog: SpotsDialog
 
     private var name: String? = null
     private var email: String? = null
@@ -40,7 +40,7 @@ class SignUp2 : AppCompatActivity() {
         mDatabase = FirebaseDatabase.getInstance()
 
         //
-        progressBar = binding.progressBarSignUp2
+        dialog = (SpotsDialog.Builder().setContext(this).build() as SpotsDialog?)!!
 
         // button sign up
         binding.btnSignUp2SignUp.setOnClickListener {
@@ -51,13 +51,15 @@ class SignUp2 : AppCompatActivity() {
             password = binding.etSignUp2Password.text.toString()
 
 
-            if (!TextUtils.isEmpty(name) || !TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)) {
-                //progressbar
-                progressBar.visibility = View.VISIBLE
-
-                //
-                firebaseAuthRegister(name!!, email!!, password!!)
+            if (!validateUserName() || !validateEmail() || !validatePassword()) {
+                return@setOnClickListener
             }
+            //progressbar
+            dialog.show()
+
+            //
+            firebaseAuthRegister(name!!, email!!, password!!)
+
         }
 
         //button already
@@ -76,7 +78,7 @@ class SignUp2 : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "createUserWithEmail:success")
-                    progressBar.visibility = View.GONE
+                    dialog.dismiss()
 
                     //get data from sign up1
                     val batch = intent.getStringExtra("batch").toString()
@@ -89,7 +91,7 @@ class SignUp2 : AppCompatActivity() {
                     val currentUser = mAuth.currentUser!!.uid
                     val usersRef = mDatabase.reference.child("Users")
 
-                    // user auth
+                    /////////////////////////////user auth ///////////////////////////////
                     val userHashMap: HashMap<Any, String> = HashMap()
                     userHashMap["batch"] = batch
                     userHashMap["name"] = name
@@ -97,17 +99,20 @@ class SignUp2 : AppCompatActivity() {
                     userHashMap["userId"] = currentUser
 
                     // uidRef value
-                    usersRef.child(currentUser)
-                        .setValue(userHashMap)
+                    usersRef.child(currentUser).setValue(userHashMap)
 
-//                     update Students Data
+                    /////////////////update Students Data /////////////////////////////////
                     updateStudentsData(batch, id, hall, mobile)
+
+                    /////////////////// reset token ////////////////////////////////////////
+                    val db = FirebaseDatabase.getInstance().getReference("Tokens").child(batch)
+                    val query = db.child(id).child("token").setValue("used")
 
                     //go to main activity
                     goToMainActivity()
 
                 } else {
-                    progressBar.visibility = View.GONE
+                    dialog.dismiss()
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(
                         this, "Authentication failed.",
@@ -141,5 +146,66 @@ class SignUp2 : AppCompatActivity() {
         mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(mainIntent)
         finish()
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
+
+    // student name
+    private fun validateUserName(): Boolean {
+        val value = binding.etSignUp2Name.text.toString()
+
+        return when {
+            value.isEmpty() -> {
+                binding.tilSignUp2Name.error = "Field can't be empty"
+                false
+            }
+            value.length < 4 -> {
+                binding.tilSignUp2Name.error = ("Too small User name")
+                false
+            }
+            else -> {
+                binding.tilSignUp2Name.error = null
+                binding.tilSignUp2Name.isErrorEnabled = false
+                true
+            }
+        }
+    }
+
+    // student email
+    private fun validateEmail(): Boolean {
+        val value = binding.etSignUp2Email.text.toString()
+
+        return when {
+            value.isEmpty() -> {
+                binding.tilSignUp2Email.error = "Field can't be empty"
+                false
+            }
+            else -> {
+                binding.tilSignUp2Email.error = null
+                binding.tilSignUp2Email.isErrorEnabled = false
+                true
+            }
+        }
+    }
+
+    // student password
+    private fun validatePassword(): Boolean {
+        val value = binding.etSignUp2Password.text.toString()
+
+        return when {
+            value.isEmpty() -> {
+                binding.tilSignUp2Password.error = "Field can't be empty"
+                false
+            }
+            value.length < 8 -> {
+                binding.tilSignUp2Password.error = ("Password should contain 8 digits!")
+                false
+            }
+            else -> {
+                binding.tilSignUp2Password.error = null
+                binding.tilSignUp2Password.isErrorEnabled = false
+                true
+            }
+        }
     }
 }

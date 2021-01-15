@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.database.FirebaseDatabase
+import com.reyad.psychology.dashboard.MainActivity
 import com.reyad.psychology.databinding.ActivityMobileSignIn2Binding
 import dmax.dialog.SpotsDialog
 import java.util.concurrent.TimeUnit
@@ -31,7 +32,7 @@ class MobileSignIn2 : AppCompatActivity() {
 
         dialog = SpotsDialog.Builder().setContext(this).build() as SpotsDialog?
 
-        val mobile = intent.getStringExtra("mobile").toString()
+        val mobile = "+88${intent.getStringExtra("mobile").toString()}"
         binding.tvMobileMain2.text = mobile
 
         //
@@ -52,7 +53,7 @@ class MobileSignIn2 : AppCompatActivity() {
     private fun sendVerificationCodeToUser(mobile: String) {
         dialog?.show()
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            "+88$mobile", // Phone number to verify
+            mobile, // Phone number to verify
             60,             // Timeout duration
             TimeUnit.SECONDS,   // Unit of timeout
             this,           // Activity (for callback binding)
@@ -134,6 +135,8 @@ class MobileSignIn2 : AppCompatActivity() {
                     val userHashMap: HashMap<Any, String> = HashMap()
                     userHashMap["batch"] = batch
                     userHashMap["id"] = id
+                    userHashMap["blood"] = blood
+                    userHashMap["hall"] = hall
                     userHashMap["mobile"] = mobile
                     userHashMap["password"] = password
                     userHashMap["userId"] = currentUser
@@ -143,7 +146,7 @@ class MobileSignIn2 : AppCompatActivity() {
                         .setValue(userHashMap)
                         .addOnCompleteListener {
                             //
-                            val intent = Intent(this, FirstActivity::class.java)
+                            val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                         }
                         .addOnFailureListener {

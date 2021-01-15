@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#33000000">
+        android:background="@color/liteWhite">
 
         <ImageView
             android:id="@+id/civ_profile_teacher_details"
@@ -22,29 +22,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_mail_teacher_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/bg_email_btn"
-            android:padding="12dp"
-            android:src="@drawable/ic_baseline_mail_outline_24"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/civ_profile_teacher_details" />
-
-        <ImageButton
-            android:id="@+id/btn_call_teacher_details"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/bg_call_btn"
-            android:padding="12dp"
-            android:src="@drawable/ic_baseline_call_24"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_mail_teacher_details"
-            app:layout_constraintEnd_toStartOf="@+id/btn_mail_teacher_details"
-            app:layout_constraintTop_toTopOf="@+id/btn_mail_teacher_details" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout3"
@@ -90,24 +67,25 @@
 
             <View
                 android:id="@+id/view"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="2dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintTop_toBottomOf="@+id/tv_phd_teacher_details"
-                tools:layout_editor_absoluteX="24dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_phd_teacher_details" />
 
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Field of Interest"
+                android:paddingTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Field of Interest :"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/tv_post_teacher_details"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <TextView
@@ -122,17 +100,41 @@
                 android:id="@+id/btn_publication_teacher_model"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="publications"
+                android:textSize="18sp"
+                android:visibility="visible"
+                app:cornerRadius="32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                android:text="publications"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textSize="17sp"
-                app:cornerRadius="16dp"
-                android:padding="8dp"
-                android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_call_teacher_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_call_btn"
+                android:padding="12dp"
+                android:src="@drawable/ic_baseline_call_24"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_post_teacher_details"
+                app:layout_constraintEnd_toStartOf="@+id/btn_mail_teacher_details"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_teacher_details"
+                app:layout_constraintVertical_bias="0.478" />
+
+            <ImageButton
+                android:id="@+id/btn_mail_teacher_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_email_btn"
+                android:padding="12dp"
+                android:src="@drawable/ic_baseline_mail_outline_24"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_call_teacher_details"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_call_teacher_details" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

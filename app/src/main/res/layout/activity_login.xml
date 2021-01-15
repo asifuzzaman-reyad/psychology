@@ -37,28 +37,30 @@ tools:context=".register.Login">
 
     <!-- editText email-->
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_email_login"
+        android:id="@+id/til_mobile_login"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         app:endIconMode="clear_text">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_email_login"
+            android:id="@+id/et_mobile_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
+            android:hint="@string/mobile"
+            android:inputType="phone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- ditText password-->
+    <!-- eitText password-->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_password_login"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:errorEnabled="true"
         app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText

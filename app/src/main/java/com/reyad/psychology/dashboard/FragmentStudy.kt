@@ -75,24 +75,14 @@ class FragmentStudy : Fragment() {
         //auth
         val uid = FirebaseAuth.getInstance().currentUser?.uid
 
-        // class
-        class UserItems(
-            val batch: String? = "",
-            val id: String? = "",
-        ) {
-            constructor() : this("", "")
-        }
-
         //database
         val db = FirebaseDatabase.getInstance().reference
-        val userRef = db.child("Users_Mobile").child(uid!!)
+        val userRef = db.child("Users").child(uid!!)
 
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach {
-                    val userData = snapshot.getValue(UserItems::class.java)
 
-                    batch = userData?.batch.toString()
+                    batch = snapshot.child("batch").value.toString()
                     Log.i("main", "$batch ")
 
                     // set course code and name
@@ -100,7 +90,6 @@ class FragmentStudy : Fragment() {
 
                     courseConst.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
-                }
             }
 
             override fun onCancelled(error: DatabaseError) {

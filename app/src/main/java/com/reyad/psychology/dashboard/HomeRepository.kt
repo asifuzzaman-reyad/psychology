@@ -22,11 +22,11 @@ class HomeRepository(val app: Application) {
     //
     private fun callFirebaseService(batch: String, mutableStudentList: MutableLiveData<List<StudentItemList>>) {
         val db = FirebaseDatabase.getInstance()
-        val ref = db.getReference("Students")
+        val ref = db.getReference("Students").child(batch).orderByChild("priority")
 
         val items = ArrayList<StudentItemList>()
 
-        ref.child(batch).addValueEventListener(object : ValueEventListener {
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
                     val data = it.getValue(StudentItemList::class.java)
@@ -38,7 +38,7 @@ class HomeRepository(val app: Application) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.i("homeRepo", error.message)
             }
         })
     }

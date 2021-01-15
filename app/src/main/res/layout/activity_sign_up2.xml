@@ -50,8 +50,8 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
+        android:layout_marginTop="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -73,8 +73,10 @@
                 android:padding="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0">
 
                 <!-- eitText name-->
                 <com.google.android.material.textfield.TextInputLayout
@@ -91,7 +93,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/open_sans"
                         android:hint="@string/name"
-                        android:inputType="textEmailAddress" />
+                        android:inputType="textCapWords" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- eitText email-->
@@ -148,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/open_sans"
-                    android:padding="12dp"
+                    android:padding="8dp"
                     android:text="@string/already_have_an_account"
                     android:textAllCaps="false"
                     android:textColor="@android:color/black"

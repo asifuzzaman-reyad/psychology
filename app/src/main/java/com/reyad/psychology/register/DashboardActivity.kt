@@ -3,14 +3,9 @@ package com.reyad.psychology.register
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
@@ -43,8 +38,6 @@ class DashboardActivity : AppCompatActivity() {
         // firebase auth
         retrieveFirebaseUsers()
 
-        //load bar code
-        barcode()
 
         //sign out
         binding.signOutProfile.setOnClickListener {
@@ -57,6 +50,38 @@ class DashboardActivity : AppCompatActivity() {
             editProfileIntent()
         }
 
+    }
+
+    // firebase auth
+    private fun retrieveFirebaseUsers() {
+        name = intent.getStringExtra("name").toString()
+        id = intent.getStringExtra("id").toString()
+        hall = intent.getStringExtra("hall").toString()
+        imageUrl = intent.getStringExtra("imageUrl")
+
+        binding.tvNameProfile.text = name
+        binding.tvIdProfile.text = id
+        binding.tvHallProfile.text = hall
+
+        if (imageUrl!!.isNotEmpty()) {
+            Picasso.get().load(imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
+                .placeholder(R.drawable.male_avatar)
+                .into(binding.profileImgProfile, object : Callback {
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
+                            .into(binding.profileImgProfile)
+
+                    }
+
+                })
+        }
+
+        //load bar code
+        barcode(id.toString())
     }
 
     //
@@ -83,107 +108,6 @@ class DashboardActivity : AppCompatActivity() {
         alert.show()
     }
 
-    // firebase auth
-    private fun retrieveFirebaseUsers() {
-        // hook auth
-        mAuth = FirebaseAuth.getInstance()
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-
-        // class
-        class UserItems(
-            val batch: String? = "",
-            val id: String? = "",
-        ) {
-            constructor() : this("", "")
-        }
-
-        //database
-        val db = FirebaseDatabase.getInstance().reference
-        val userRef = db.child("Users_Mobile").child(uid!!)
-
-        userRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                val userData = snapshot.getValue(UserItems::class.java)
-
-                batch = userData?.batch.toString()
-                id = userData?.id.toString()
-                Log.i("profileActivity", "$batch ->> $id")
-
-                // retrieve firebase data
-                getStudentRef(batch!!, id!!)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
-    }
-
-    // student data retrieve
-    private fun getStudentRef(batch: String, id: String) {
-
-        val mStudentDatabase = FirebaseDatabase.getInstance().reference
-            .child("Students").child(batch).child(id)
-
-        // firebase offline
-        mStudentDatabase.keepSynced(false)
-
-        //
-        class StudentItems(
-            val name: String? = "",
-            val hall: String? = "",
-            val mobile: String? = "",
-            val imageUrl: String? = "",
-        ) {
-            constructor() : this("", "", "", "")
-        }
-
-        mStudentDatabase.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach {
-                    val studentData = snapshot.getValue(StudentItems::class.java)
-
-                    imageUrl = studentData?.imageUrl.toString()
-                    if (imageUrl!!.isNotEmpty()) {
-//                        Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar).into(binding.profileImgProfile)
-                        Picasso.get().load(imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.male_avatar)
-                            .into(binding.profileImgProfile, object : Callback {
-                                override fun onSuccess() {
-
-
-                                }
-
-                                override fun onError(e: java.lang.Exception?) {
-
-                                    Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
-                                        .into(binding.profileImgProfile)
-
-                                }
-
-                            })
-                    }
-
-                    name = studentData?.name.toString()
-                    hall = studentData?.hall.toString()
-                    mobile = studentData?.mobile.toString()
-
-                    binding.tvNameProfile.text = name
-                    binding.tvIdProfile.text = id
-                    binding.tvHallProfile.text = hall
-//                    binding.tvHallProfile.text = mobile
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-        })
-    }
-
     // send to start
     private fun sendToFirstActivity() {
         FirebaseAuth.getInstance().signOut()
@@ -206,13 +130,13 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     //bar code
-    private fun barcode() {
+    private fun barcode(id: String) {
         val multiFormatWriter = MultiFormatWriter()
 
         val imageView = binding.idBarcode
         try {
             val bitMatrix: BitMatrix =
-                multiFormatWriter.encode("18608047", BarcodeFormat.CODE_128, 200, 50)
+                multiFormatWriter.encode(id, BarcodeFormat.CODE_128, 200, 50)
             val barCodeEncoder = BarcodeEncoder()
             val bitmap = barCodeEncoder.createBitmap(bitMatrix)
             imageView.setImageBitmap(bitmap)

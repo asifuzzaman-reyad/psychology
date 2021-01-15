@@ -7,15 +7,28 @@
     tools:context=".messenger.FragmentFirst">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:paddingTop="8dp"
         android:id="@+id/recycler_view_latest_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        tools:listitem="@layout/model_latest_chat"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/model_latest_chat" />
+
+    <TextView
+        android:id="@+id/tv_no_message_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No latest Message found"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

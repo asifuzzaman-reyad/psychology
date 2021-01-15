@@ -1,7 +1,5 @@
 package com.reyad.psychology.register
 
-import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -28,7 +26,7 @@ class SignUp : AppCompatActivity() {
     private var id: String? = null
     private var blood: String? = null
     private var hall: String? = null
-    private var mobile: String? = null
+    private var pin: String? = null
     private var password: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +42,7 @@ class SignUp : AppCompatActivity() {
         //button sign in
         binding.btnSignInSign.setOnClickListener {
             if (!validateStudentBatch() || !validateStudentId() || !validateStudentBloodGr()
-                || !validateStudentHall() || !validateStudentMobile() || !validateStudentPassword()
+                || !validateStudentHall() || !validateStudentPin()
             ) {
                 return@setOnClickListener
             } else {
@@ -61,7 +59,7 @@ class SignUp : AppCompatActivity() {
         id = binding.acIdSign.text.toString()
         blood = binding.acBloodSign.text.toString()
         hall = binding.acHallSign.text.toString()
-        mobile = binding.etMobileSign.text.toString()
+        pin = binding.etMobileSign.text.toString()
         password = binding.etPasswordSign.text.toString()
 
         dialog = (SpotsDialog.Builder().setContext(this).build() as SpotsDialog?)!!
@@ -83,25 +81,31 @@ class SignUp : AppCompatActivity() {
                     val studentItemsM = snapshot.child("token").value
                     Log.i("main", "token: $studentItemsM")
 
-                    if (mobile == studentItemsM) {
+                    if (pin == studentItemsM) {
                         binding.tilMobileSign.error = null
                         binding.tilMobileSign.isErrorEnabled = false
 
                         dialog.dismiss()
 
-                        val intent = Intent(this@SignUp, MobileSignIn2::class.java).apply {
+                        val intent = Intent(this@SignUp,SignUp2::class.java).apply {
                             putExtra("batch", batch)
                             putExtra("id", snapshot.key)
                             putExtra("blood", blood)
                             putExtra("hall", hall)
-                            putExtra("mobile", mobile)
-                            putExtra("password", password)
+                            putExtra("mobile", pin)
                         }
                         startActivity(intent)
 
-                    } else {
+                    }
+                    else if(studentItemsM == "used"){
                         dialog.dismiss()
-                        binding.tilMobileSign.error = "Mobile number not match"
+                        binding.tilMobileSign.error = "Pin already used"
+                        binding.tilMobileSign.requestFocus()
+
+                    }
+                    else {
+                        dialog.dismiss()
+                        binding.tilMobileSign.error = "Pin number not match"
                         binding.tilMobileSign.requestFocus()
                     }
 
@@ -287,7 +291,7 @@ class SignUp : AppCompatActivity() {
     }
 
     // student mobile no
-    private fun validateStudentMobile(): Boolean {
+    private fun validateStudentPin(): Boolean {
         val value = binding.etMobileSign.text.toString()
 
         return when {
@@ -296,33 +300,12 @@ class SignUp : AppCompatActivity() {
                 false
             }
             value.length < 11 -> {
-                binding.tilMobileSign.error = ("Password should contain 11 digits!")
+                binding.tilMobileSign.error = ("Pin should contain 11 digits!")
                 false
             }
             else -> {
                 binding.tilMobileSign.error = null
                 binding.tilMobileSign.isErrorEnabled = false
-                true
-            }
-        }
-    }
-
-    // student password
-    private fun validateStudentPassword(): Boolean {
-        val value = binding.etPasswordSign.text.toString()
-
-        return when {
-            value.isEmpty() -> {
-                binding.tilPasswordSign.error = "Field can't be empty"
-                false
-            }
-            value.length < 8 -> {
-                binding.tilPasswordSign.error = ("Password should contain 8 digits!")
-                false
-            }
-            else -> {
-                binding.tilPasswordSign.error = null
-                binding.tilPasswordSign.isErrorEnabled = false
                 true
             }
         }

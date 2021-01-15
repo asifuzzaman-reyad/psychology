@@ -31,7 +31,7 @@ class FirstActivity : AppCompatActivity() {
 
         //button login
         binding.mBtnAlreadyFirst.setOnClickListener {
-            val loginIntent = Intent(this, Login::class.java)
+            val loginIntent = Intent(this, EmailLogin::class.java)
             startActivity(loginIntent)
         }
 

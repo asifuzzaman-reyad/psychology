@@ -20,12 +20,18 @@ import com.reyad.psychology.messenger.Messenger
 import com.reyad.psychology.register.DashboardActivity
 import com.squareup.picasso.Picasso
 
+private const val TAG = "fragmentHome"
+
 class FragmentHome : Fragment() {
 
     private lateinit var _binding: FragmentHomeBinding
     private val binding get() = _binding
+
     private var batch: String? = null
     private var id: String? = null
+    private var name: String? = null
+    private var hall: String? = null
+    private var imageUrl: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +45,9 @@ class FragmentHome : Fragment() {
             val profileIntent = Intent(requireContext(), DashboardActivity::class.java).apply {
                 putExtra("batch", batch.toString())
                 putExtra("id", id.toString())
+                putExtra("name", name.toString())
+                putExtra("hall", hall.toString())
+                putExtra("imageUrl", imageUrl.toString())
             }
             startActivity(profileIntent)
         }
@@ -74,29 +83,19 @@ class FragmentHome : Fragment() {
         //
         val uid = FirebaseAuth.getInstance().currentUser?.uid
 
-        // class
-        class UserItems(
-            val batch: String? = "",
-            val id: String? = "",
-        ) {
-            constructor() : this("", "")
-        }
-
         //database
         val db = FirebaseDatabase.getInstance().reference
         val userRef = db.child("Users").child(uid!!)
 
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach {
-                    val userData = snapshot.getValue(UserItems::class.java)
 
-                    batch = userData?.batch.toString()
-                    id = userData?.id.toString()
+                batch = snapshot.child("batch").value.toString()
+                id = snapshot.child("id").value.toString()
 
-                    Log.i("main", "$batch ---> $id")
-                    getStudentRef(batch!!, id!!)
-                }
+                Log.i(TAG, "batch ---> $batch")
+                Log.i(TAG, "id ---> $id")
+                getStudentRef(batch!!, id!!)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -113,26 +112,19 @@ class FragmentHome : Fragment() {
             .child(batch)
             .child(id)
 
-        //
-        class StudentItems(
-            val name: String? = "",
-            val imageUrl: String? = "",
-        ) {
-            constructor() : this("", "")
-        }
-
         studentRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach {
-                    val studentData = snapshot.getValue(StudentItems::class.java)
 
-                    val imageUrl = studentData?.imageUrl.toString()
-                    Log.i("mainImage", imageUrl)
+                name = snapshot.child("name").value.toString()
+                hall = snapshot.child("hall").value.toString()
+                imageUrl = snapshot.child("imageUrl").value.toString()
+                Log.i(TAG, "hall: ${hall.toString()}")
+                Log.i(TAG, "imageUrl: ${imageUrl.toString()}")
 
-                    if (imageUrl.isNotEmpty()) {
-                        Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
-                            .into(binding.civProfileHome)
-                    }
+                if (imageUrl!!.isNotEmpty()) {
+                    Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
+                        .into(binding.civProfileHome)
+
                 }
             }
 

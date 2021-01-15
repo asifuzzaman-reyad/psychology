@@ -32,7 +32,7 @@ class StudentAdapter(
         holder.fText.text = mPosition.name
         holder.lText.text = mPosition.id
 
-        if (mPosition.imageUrl != "") {
+        if (mPosition.imageUrl.isNotEmpty()) {
             Picasso.get().load(mPosition.imageUrl).placeholder(R.drawable.bg_call_btn)
                 .into(holder.civProfile)
         }
