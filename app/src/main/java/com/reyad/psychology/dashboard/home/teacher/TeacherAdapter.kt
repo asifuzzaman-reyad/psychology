@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.reyad.psychology.R
+import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
 
@@ -34,7 +36,23 @@ class TeacherAdapter(
 
         holder.textNameT.text = itemPos.name
         holder.textPost.text = itemPos.post
-        Picasso.get().load(itemPos.imageUrl).into(holder.imageUrlT)
+
+        // picasso offline
+        if (itemPos.imageUrl.isNotEmpty()) {
+            Picasso.get().load(itemPos.imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
+                .placeholder(R.drawable.male_avatar)
+                .into(holder.imageUrl, object : Callback {
+                    override fun onSuccess() {
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        Picasso.get().load(itemPos.imageUrl).placeholder(R.drawable.male_avatar)
+                            .into(holder.imageUrl)
+                    }
+
+                })
+        }
+
 
         holder.itemView.setOnClickListener {
             teacherItemListener.onItemClick(itemPos)
@@ -45,7 +63,7 @@ class TeacherAdapter(
     class TeacherViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var textNameT: TextView = itemView.findViewById(R.id.textViewName_teacher_head)
         var textPost: TextView = itemView.findViewById(R.id.textView_post_teacher_head)
-        var imageUrlT: ImageView = itemView.findViewById(R.id.imageView_teacher_model)
+        var imageUrl: ImageView = itemView.findViewById(R.id.imageView_teacher_model)
     }
 
     interface TeacherItemListener {

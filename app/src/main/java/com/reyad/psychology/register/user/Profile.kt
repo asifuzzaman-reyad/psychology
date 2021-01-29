@@ -1,31 +1,40 @@
-package com.reyad.psychology.register
+package com.reyad.psychology.register.user
 
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.common.BitMatrix
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.reyad.psychology.R
 import com.reyad.psychology.databinding.ActivityProfileBinding
+import com.reyad.psychology.register.login.FirstActivity
 import com.squareup.picasso.Callback
 import com.squareup.picasso.NetworkPolicy
 import com.squareup.picasso.Picasso
 
-class DashboardActivity : AppCompatActivity() {
+class Profile : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var mAuth: FirebaseAuth
 
     private var batch: String? = null
     private var id: String? = null
+
     private var name: String? = null
     private var hall: String? = null
     private var mobile: String? = null
+    private var blood: String? = null
     private var imageUrl: String? = null
 
 
@@ -35,57 +44,95 @@ class DashboardActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // firebase auth
-        retrieveFirebaseUsers()
-
-
         //sign out
         binding.signOutProfile.setOnClickListener {
             // sign out alert dialog
-            alertDialog()
+            signOutAlertDialog()
         }
 
         // go to edit profile
         binding.btnEditProfile.setOnClickListener {
-            editProfileIntent()
+            goToEditProfileIntent()
         }
 
-    }
-
-    // firebase auth
-    private fun retrieveFirebaseUsers() {
-        name = intent.getStringExtra("name").toString()
-        id = intent.getStringExtra("id").toString()
-        hall = intent.getStringExtra("hall").toString()
-        imageUrl = intent.getStringExtra("imageUrl")
-
-        binding.tvNameProfile.text = name
-        binding.tvIdProfile.text = id
-        binding.tvHallProfile.text = hall
-
-        if (imageUrl!!.isNotEmpty()) {
-            Picasso.get().load(imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
-                .placeholder(R.drawable.male_avatar)
-                .into(binding.profileImgProfile, object : Callback {
-                    override fun onSuccess() {
-
-                    }
-
-                    override fun onError(e: java.lang.Exception?) {
-                        Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
-                            .into(binding.profileImgProfile)
-
-                    }
-
-                })
-        }
-
-        //load bar code
-        barcode(id.toString())
     }
 
     //
-    private fun alertDialog() {
+    override fun onStart() {
+        super.onStart()
+        // firebase auth
+        loadUserInfo()
+    }
+
+    // firebase auth
+    private fun loadUserInfo() {
+
+        batch = intent.getStringExtra("batch").toString()
+        id = intent.getStringExtra("id").toString()
+
+
+        val db = FirebaseDatabase.getInstance().getReference("Students")
+        val ref = db.child(batch!!).child(id!!)
+
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    Log.i("testProfile", snapshot.child("name").value.toString())
+
+                    name = snapshot.child("name").value.toString()
+                    hall = snapshot.child("hall").value.toString()
+                    mobile = snapshot.child("mobile").value.toString()
+                    blood = snapshot.child("blood").value.toString()
+                    imageUrl = snapshot.child("imageUrl").value.toString()
+
+                    Log.i("profile", "$batch ->> $id ->> $name->> $hall ->> $mobile ->> $imageUrl")
+
+                    //
+                    binding.tvNameProfile.text = name
+                    binding.tvIdProfile.text = id
+                    binding.tvHallProfile.text = hall
+                    binding.tvMobileProfile.text = mobile
+                    binding.tvBloodProfile.text = blood
+
+                    //picasso offline
+                    if (imageUrl!!.isNotEmpty()) {
+                        Picasso.get().load(imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
+                            .placeholder(R.drawable.male_avatar)
+                            .into(binding.profileImgProfile, object : Callback {
+                                override fun onSuccess() {
+
+                                }
+
+                                override fun onError(e: java.lang.Exception?) {
+                                    Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
+                                        .into(binding.profileImgProfile)
+
+                                }
+
+                            })
+                    }
+
+                    //
+                    //load bar code
+                    barcode(id.toString())
+
+                } else {
+                    Toast.makeText(this@Profile, "Something wrong", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@Profile, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //
+    private fun signOutAlertDialog() {
         val title = "Sign Out"
         val message = "Do you want to Sign Out?"
 
@@ -95,7 +142,7 @@ class DashboardActivity : AppCompatActivity() {
             .setCancelable(false)
             .setPositiveButton("Yes", DialogInterface.OnClickListener { dialog, id ->
                 // sendToFirstActivity
-                sendToFirstActivity()
+                goToFirstActivity()
             })
             // negative button text and action
             .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
@@ -109,7 +156,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     // send to start
-    private fun sendToFirstActivity() {
+    private fun goToFirstActivity() {
         FirebaseAuth.getInstance().signOut()
         val mainIntent = Intent(this, FirstActivity::class.java)
         startActivity(mainIntent)
@@ -117,7 +164,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     // go to editProfile
-    private fun editProfileIntent() {
+    private fun goToEditProfileIntent() {
         val editProfileIntent = Intent(this, ProfileEdit::class.java).apply {
             putExtra("batch", batch.toString())
             putExtra("id", id.toString())
@@ -126,6 +173,7 @@ class DashboardActivity : AppCompatActivity() {
             putExtra("mobile", mobile.toString())
             putExtra("imageUrl", imageUrl.toString())
         }
+
         startActivity(editProfileIntent)
     }
 

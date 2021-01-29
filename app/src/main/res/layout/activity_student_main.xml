@@ -14,9 +14,8 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:gravity="center"
             android:minHeight="?actionBarSize"
             android:text="Student List"
@@ -25,6 +24,7 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            app:tabMode="scrollable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>

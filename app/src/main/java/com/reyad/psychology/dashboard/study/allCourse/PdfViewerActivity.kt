@@ -1,4 +1,4 @@
-package com.reyad.psychology.dashboard.study
+package com.reyad.psychology.dashboard.study.allCourse
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -39,20 +39,18 @@ class PdfViewerActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        haveStoragePermission()
+
         val lessonNo: String? = intent.getStringExtra("lesson")
         binding.tvTitlePdfViewer.text = lessonNo
 
         link = intent.getStringExtra("pdfLink")
         Log.i("link", link!!)
 
-        haveStoragePermission()
-
-        loadPdf(link)
         loadProgressBar()
-        binding.btnDownloadPdfViewer.setOnClickListener {
-            imageName = "$lessonNo.pdf"
-            downloadImage(link, imageName)
-        }
+
+        //
+        loadPdf(link)
     }
 
     //
@@ -105,18 +103,6 @@ class PdfViewerActivity : AppCompatActivity() {
             })
     }
 
-    // download pdf
-    private fun downloadImage(url: String?, outputFileName: String?) {
-        val request = DownloadManager.Request(Uri.parse(url))
-        request.setTitle(imageName)
-        request.setDescription("Downloading $imageName")
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-        request.allowScanningByMediaScanner()
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, outputFileName)
-        val manager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        manager.enqueue(request)
-    }
-
     //
     @SuppressLint("SetTextI18n")
     fun loadProgressBar() {
@@ -160,7 +146,7 @@ class PdfViewerActivity : AppCompatActivity() {
                 )
                 false
             }
-        } else { //you dont need to worry about these stuff below api level 23
+        } else { //you don't need to worry about these stuff below api level 23
             Log.e("Permission error", "You already have the permission")
             true
         }

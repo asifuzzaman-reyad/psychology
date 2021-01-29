@@ -33,7 +33,8 @@
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_sing_up2_title"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_sing_up2_title" />
 
     <ProgressBar
         android:id="@+id/progressBar_sign_up2"
@@ -50,115 +51,97 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_sing_up2_title">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/linearLayout_mSign"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="#75ECF4F1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
-            <LinearLayout
-                android:id="@+id/linearLayout_mSign"
+            <!-- eitText name-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_sign_up2_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:background="#75ECF4F1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0">
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
 
-                <!-- eitText name-->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_sign_up2_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_sign_up2_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_sign_up2_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/open_sans"
-                        android:hint="@string/name"
-                        android:inputType="textCapWords" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- eitText email-->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_sign_up2_email"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_sign_up2_email"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/open_sans"
-                        android:hint="@string/email"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- eitText password-->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_sign_up2_password"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:errorEnabled="true"
-                    app:passwordToggleEnabled="true">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_sign_up2_password"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:fontFamily="@font/open_sans"
-                        android:hint="@string/password"
-                        android:inputType="textPassword" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <!-- button sign up -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_sign_up2_sign_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/open_sans"
-                    android:padding="10dp"
-                    android:text="@string/sign_up"
-                    android:textAllCaps="false"
-                    android:textSize="17sp" />
+                    android:hint="@string/name"
+                    android:inputType="textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- button already -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_sign_up2_already"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+            <!-- eitText email-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_sign_up2_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_sign_up2_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/open_sans"
-                    android:padding="8dp"
-                    android:text="@string/already_have_an_account"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/black"
-                    android:textSize="17sp" />
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            </LinearLayout>
+            <!-- eitText password-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_sign_up2_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_sign_up2_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/open_sans"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- button sign up -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sign_up2_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:padding="10dp"
+                android:text="@string/sign_up"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+
+        </LinearLayout>
 
     </ScrollView>
 

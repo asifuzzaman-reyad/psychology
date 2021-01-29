@@ -200,7 +200,7 @@ class MessageChatActivity : AppCompatActivity() {
                         "$userName",
                         senderId
                     )
-                    val sender = Sender(data!!, token!!.getToken().toString())
+                    val sender = Sender(data, token!!.getToken().toString())
                     apiService!!.sendNotification(sender)
                         .enqueue(object : Callback<MyResponse> {
                             override fun onResponse(

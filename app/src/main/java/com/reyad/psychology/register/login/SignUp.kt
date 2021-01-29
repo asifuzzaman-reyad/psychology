@@ -1,4 +1,4 @@
-package com.reyad.psychology.register
+package com.reyad.psychology.register.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.reyad.psychology.R
 import com.reyad.psychology.databinding.ActivitySignUpMainBinding
+import com.reyad.psychology.register.Login
 import dmax.dialog.SpotsDialog
 import java.util.*
 
@@ -27,7 +28,7 @@ class SignUp : AppCompatActivity() {
     private var blood: String? = null
     private var hall: String? = null
     private var pin: String? = null
-    private var password: String? = null
+    private var mobileNo: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +41,9 @@ class SignUp : AppCompatActivity() {
         loadHall()
 
         //button sign in
-        binding.btnSignInSign.setOnClickListener {
+        binding.btnSignUpSign.setOnClickListener {
             if (!validateStudentBatch() || !validateStudentId() || !validateStudentBloodGr()
-                || !validateStudentHall() || !validateStudentPin()
+                || !validateStudentHall() || !validateStudentPin() || !validateStudentMobile()
             ) {
                 return@setOnClickListener
             } else {
@@ -50,19 +51,31 @@ class SignUp : AppCompatActivity() {
             }
 
         }
+
+        //button already
+        binding.btnSignUpAlready.setOnClickListener {
+            val loginIntent = Intent(this, EmailLogin::class.java)
+            loginIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(loginIntent)
+            finish()
+        }
     }
 
     //
     private fun studentVerification() {
         batch = binding.acBatchSign.text.toString()
-        Log.i("main", "batch: $batch")
+        Log.i("signUp", "batch: $batch")
         id = binding.acIdSign.text.toString()
         blood = binding.acBloodSign.text.toString()
         hall = binding.acHallSign.text.toString()
-        pin = binding.etMobileSign.text.toString()
-        password = binding.etPasswordSign.text.toString()
+        pin = binding.etPinSign.text.toString()
+        mobileNo = binding.etMobileSign.text.toString()
 
-        dialog = (SpotsDialog.Builder().setContext(this).build() as SpotsDialog?)!!
+        //
+        dialog = SpotsDialog.Builder().setContext(this)
+            .setCancelable(false)
+            .setMessage("Verify Id and Pin...")
+            .build() as SpotsDialog
         dialog.show()
 
         // check batch , id , mobile
@@ -81,32 +94,34 @@ class SignUp : AppCompatActivity() {
                     val studentItemsM = snapshot.child("token").value
                     Log.i("main", "token: $studentItemsM")
 
-                    if (pin == studentItemsM) {
-                        binding.tilMobileSign.error = null
-                        binding.tilMobileSign.isErrorEnabled = false
+                    when {
+                        pin == studentItemsM -> {
+                            binding.tilPinSign.error = null
+                            binding.tilPinSign.isErrorEnabled = false
 
-                        dialog.dismiss()
+                            dialog.dismiss()
 
-                        val intent = Intent(this@SignUp,SignUp2::class.java).apply {
-                            putExtra("batch", batch)
-                            putExtra("id", snapshot.key)
-                            putExtra("blood", blood)
-                            putExtra("hall", hall)
-                            putExtra("mobile", pin)
+                            val intent = Intent(this@SignUp, SignUp2::class.java).apply {
+                                putExtra("batch", batch)
+                                putExtra("id", snapshot.key)
+                                putExtra("blood", blood)
+                                putExtra("hall", hall)
+                                putExtra("mobile", mobileNo)
+                            }
+                            startActivity(intent)
+
                         }
-                        startActivity(intent)
+                        studentItemsM == "used" -> {
+                            dialog.dismiss()
+                            binding.tilPinSign.error = "Pin already used"
+                            binding.tilPinSign.requestFocus()
 
-                    }
-                    else if(studentItemsM == "used"){
-                        dialog.dismiss()
-                        binding.tilMobileSign.error = "Pin already used"
-                        binding.tilMobileSign.requestFocus()
-
-                    }
-                    else {
-                        dialog.dismiss()
-                        binding.tilMobileSign.error = "Pin number not match"
-                        binding.tilMobileSign.requestFocus()
+                        }
+                        else -> {
+                            dialog.dismiss()
+                            binding.tilPinSign.error = "Pin number not match"
+                            binding.tilPinSign.requestFocus()
+                        }
                     }
 
                 }
@@ -193,8 +208,14 @@ class SignUp : AppCompatActivity() {
     private fun loadBloodGr() {
         //list
         val bloodGrList = listOf(
-            "A+", "B+", "AB+", "O+",
-            "A-", "B-", "AB-", "O-"
+            "O+",
+            "O-",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-"
         )
         //array adapter
         val adapterBlood = ArrayAdapter(this, R.layout.material_spinner_item, bloodGrList)
@@ -290,17 +311,38 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    // student mobile no
+    // student pin
     private fun validateStudentPin(): Boolean {
+        val value = binding.etPinSign.text.toString()
+
+        return when {
+            value.isEmpty() -> {
+                binding.tilPinSign.error = "Field can not be empty"
+                false
+            }
+            value.length < 8 -> {
+                binding.tilPinSign.error = ("Pin should be 8 digits!")
+                false
+            }
+            else -> {
+                binding.tilPinSign.error = null
+                binding.tilPinSign.isErrorEnabled = false
+                true
+            }
+        }
+    }
+
+    // student mobile
+    private fun validateStudentMobile(): Boolean {
         val value = binding.etMobileSign.text.toString()
 
         return when {
             value.isEmpty() -> {
-                binding.tilMobileSign.error = "Field can not be empty"
+                binding.tilMobileSign.error = "Field can't be empty"
                 false
             }
             value.length < 11 -> {
-                binding.tilMobileSign.error = ("Pin should contain 11 digits!")
+                binding.tilMobileSign.error = ("Mobile number should be 11 digits")
                 false
             }
             else -> {
@@ -310,5 +352,4 @@ class SignUp : AppCompatActivity() {
             }
         }
     }
-
 }

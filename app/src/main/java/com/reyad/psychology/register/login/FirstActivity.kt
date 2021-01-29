@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.reyad.psychology.register
+package com.reyad.psychology.register.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

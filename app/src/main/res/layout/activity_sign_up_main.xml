@@ -4,21 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".register.SignUp">
+    tools:context=".register.login.SignUp">
+
+    <!-- textView sign up-->
+    <TextView
+        android:id="@+id/tv_sing_up2_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/muli_black"
+        android:text="@string/sign_up"
+        android:textAllCaps="true"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- textView 1/2-->
+    <TextView
+        android:id="@+id/tv_sing_up2_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/muli_black"
+        android:text="@string/_1_2"
+        android:textAllCaps="true"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_sing_up2_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_sing_up2_title" />
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tv_sing_up2_title">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:gravity="center_horizontal"
             android:padding="16dp">
 
             <!-- eitText batch-->
@@ -108,7 +140,27 @@
                     tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- eitText mobile -->
+            <!-- eitText pin -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_pin_sign"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_pin_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/open_sans"
+                    android:hint="@string/pin"
+                    android:inputType="number"
+                    android:maxLength="8" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- eitText password-->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_mobile_sign"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -123,39 +175,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:fontFamily="@font/open_sans"
-                    android:hint="@string/pin"
+                    android:hint="@string/mobile"
                     android:inputType="number"
                     android:maxLength="11" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- eitText password-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_password_sign"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:counterEnabled="true"
-                app:errorEnabled="true"
-                android:visibility="gone"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/et_password_sign"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/open_sans"
-                    android:hint="@string/password"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_sign_in_sign"
+                android:id="@+id/btn_sign_up_sign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:padding="8dp"
                 android:text="Sign In"
                 android:textSize="18sp" />
+
+            <!-- button already -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sign_up_already"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:text="@string/already_have_an_account"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="17sp" />
 
         </LinearLayout>
 

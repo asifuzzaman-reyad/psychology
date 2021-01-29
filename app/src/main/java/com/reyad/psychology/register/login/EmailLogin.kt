@@ -1,13 +1,11 @@
-package com.reyad.psychology.register
+package com.reyad.psychology.register.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
-import com.reyad.psychology.R
 import com.reyad.psychology.dashboard.MainActivity
 import com.reyad.psychology.databinding.ActivityEmailLoginBinding
 import dmax.dialog.SpotsDialog

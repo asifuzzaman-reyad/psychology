@@ -4,31 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.reyad.psychology.R
 
 
-class TeacherMain : Fragment() {
+class TeacherMain : AppCompatActivity() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_teacher_main, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_teacher_main)
 
-        val pagerAdapter = TeacherPagerAdapter(childFragmentManager)
+        val pagerAdapter = TeacherPagerAdapter(supportFragmentManager)
         pagerAdapter.addFragment(TeacherPresent(), "Present")
         pagerAdapter.addFragment(TeacherAbsent(), "Study Leave")
 
-        val viewPager: ViewPager = view.findViewById(R.id.view_pager_teacher)
+        val viewPager: ViewPager = findViewById(R.id.view_pager_teacher)
         viewPager.adapter = pagerAdapter
 
-        val tabs: TabLayout = view.findViewById(R.id.tabs)
+        val tabs: TabLayout = findViewById(R.id.tabs)
         tabs.setupWithViewPager(viewPager)
 
-        return view
     }
 }

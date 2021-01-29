@@ -14,33 +14,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Psychology">
-        <activity android:name=".register.LoginEmail"></activity>
-        <activity android:name=".register.EmailLogin" />
-        <activity android:name=".dashboard.study.course.CourseActivity" />
-        <activity android:name=".register.SplashActivity">
+
+        <activity android:name=".dashboard.study.allCourse.CourseChapterLesson" />
+        <activity android:name=".dashboard.study.allCourse.CourseChapter" />
+        <activity android:name=".register.login.EmailLogin" />
+
+        <activity android:name=".register.login.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".register.FirstActivity" />
-        <activity android:name=".register.SignUp" />
+        <activity android:name=".register.login.FirstActivity" />
+        <activity android:name=".register.login.SignUp" />
+        <activity android:name=".register.login.SignUp2" />
         <activity android:name=".register.MobileSignIn2" />
         <activity android:name=".messenger.users.MessageChatActivity" />
         <activity android:name=".dashboard.home.teacher.TeacherDetailsActivity" />
-        <activity android:name=".register.SignUp1" />
-        <activity android:name=".register.SignUp2" />
         <activity android:name=".register.Login" />
+        <activity android:name=".register.SignUp1" />
         <activity android:name=".dashboard.MainActivity" />
-        <activity android:name=".register.DashboardActivity" />
-        <activity android:name=".dashboard.study.PdfViewerActivity" /> <!-- activity -->
-        <activity android:name=".register.ProfileEdit" />
+        <activity android:name=".register.user.Profile" />
+        <activity android:name=".dashboard.study.allCourse.PdfViewerActivity" /> <!-- activity -->
+        <activity android:name=".register.user.ProfileEdit" />
         <activity android:name=".messenger.Messenger" /> <!-- image crop -->
         <activity android:name=".messenger.users.AllUser" />
         <activity android:name=".messenger.users.UserProfile" />
         <activity android:name=".dashboard.home.student.StudentMain" />
-        <activity android:name=".dashboard.study.course.StudyActivity2" />
+        <activity android:name=".dashboard.home.teacher.TeacherMain" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

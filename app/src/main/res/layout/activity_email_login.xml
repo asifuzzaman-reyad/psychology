@@ -4,19 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".register.EmailLogin">
+    tools:context=".register.login.EmailLogin">
 
+
+    <!-- textView login-->
+    <TextView
+        android:id="@+id/tv_title_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/muli_black"
+        android:text="@string/login"
+        android:textAllCaps="true"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_login">
 
         <!-- eitText mobile-->
         <com.google.android.material.textfield.TextInputLayout
@@ -60,13 +76,23 @@
             android:id="@+id/btn_login_login_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/login"/>
+            android:layout_marginTop="16dp"
+            android:padding="12dp"
+            android:text="@string/login"
+            android:textAllCaps="false"
+            android:textSize="17dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_already_login_email"
-            android:layout_width="match_parent"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_have_an_account"/>
+            android:fontFamily="@font/open_sans"
+            android:padding="12dp"
+            android:text="@string/create_new_account"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
 
 
     </LinearLayout>

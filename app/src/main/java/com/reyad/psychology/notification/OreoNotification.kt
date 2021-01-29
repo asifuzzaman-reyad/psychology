@@ -63,7 +63,7 @@ class OreoNotification(base: Context?) : ContextWrapper(base) {
             .setContentIntent(pendingIntent)
             .setContentTitle(title)
             .setContentText(body).setSound(soundUri).setAutoCancel(true)
-            .setSmallIcon(icon!!.toInt())
+            .setSmallIcon(icon.toInt())
     }
 }
 

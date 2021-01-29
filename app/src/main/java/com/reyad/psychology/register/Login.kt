@@ -2,27 +2,16 @@
 
 package com.reyad.psychology.register
 
-import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
-import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.text.TextUtils
-import android.util.Log
-import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.reyad.psychology.R
-import com.reyad.psychology.dashboard.MainActivity
 import com.reyad.psychology.databinding.ActivityLoginBinding
+import com.reyad.psychology.register.login.SignUp
 
 class Login : AppCompatActivity() {
 

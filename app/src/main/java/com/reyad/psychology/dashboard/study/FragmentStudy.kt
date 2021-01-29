@@ -1,4 +1,4 @@
-package com.reyad.psychology.dashboard
+package com.reyad.psychology.dashboard.study
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -217,43 +217,44 @@ class FragmentStudy : Fragment() {
     private fun courseOnClick() {
         binding.ln01.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentStudy2_to_courseList)
-            sendStudySharedPref(code1.text.toString ())
+            sendSharedPrefStudy(year!!,code1.text.toString ())
             Log.i("study1", "code:${code1.text}")
         }
 
         binding.ln02.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentStudy2_to_courseList)
-            sendStudySharedPref(code2.text.toString ())
+            sendSharedPrefStudy(year!!,code2.text.toString ())
         }
 
         binding.ln03.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentStudy2_to_courseList)
-            sendStudySharedPref(code3.text.toString ())
+            sendSharedPrefStudy(year!!, code3.text.toString ())
         }
 
         binding.ln04.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentStudy2_to_courseList)
-            sendStudySharedPref(code4.text.toString ())
+            sendSharedPrefStudy(year!!, code4.text.toString ())
         }
 
         binding.ln05.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentStudy2_to_courseList)
-            sendStudySharedPref(code5.text.toString ())
+            sendSharedPrefStudy(year!!, code5.text.toString ())
         }
         binding.ln06.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentStudy2_to_courseList)
-            sendStudySharedPref(code6.text.toString ())
+            sendSharedPrefStudy(year!!, code6.text.toString ())
         }
     }
 
     //
     @SuppressLint("CommitPrefEdits")
-    fun sendStudySharedPref(
-        value1: String
+    fun sendSharedPrefStudy(
+        year: String, courseCode: String
     ) {
-        val sharedPreferences = context?.getSharedPreferences("study", Context.MODE_PRIVATE)
+        val sharedPreferences = context?.getSharedPreferences("studyFragment", Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
-        editor?.putString("key1", value1)
+        editor?.putString("year", year)
+        editor?.putString("courseCode", courseCode)
         editor?.apply()
     }
 }

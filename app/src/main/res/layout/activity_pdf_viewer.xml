@@ -4,36 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".dashboard.study.PdfViewerActivity">
+    tools:context=".dashboard.study.allCourse.PdfViewerActivity">
 
 
-    <TextView
-        android:id="@+id/tv_title_pdf_viewer"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#33000000"
-        android:padding="16dp"
-        android:hint="Pdf"
-        android:paddingStart="16dp"
-        android:textColor="@color/black"
-        android:textSize="17sp"
+        android:background="@color/liteWhite"
+        android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center_vertical"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_download_pdf_viewer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="@color/black"
-        android:textAllCaps="false"
-        android:text="Download"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_title_pdf_viewer"
-        app:layout_constraintEnd_toEndOf="@+id/tv_title_pdf_viewer"
-        app:layout_constraintTop_toTopOf="@+id/tv_title_pdf_viewer" />
+        <TextView
+            android:id="@+id/tv_title_pdf_viewer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:hint="Pdf"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ProgressBar
         android:id="@+id/progressBar_pdf_viewer"
@@ -44,27 +42,31 @@
         android:max="100"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_pdf_viewer" />
+        app:layout_constraintStart_toStartOf="@+id/appBarLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout4" />
 
     <TextView
         android:id="@+id/pdf_progress_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:hint="process"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar_pdf_viewer" />
 
     <com.github.barteksc.pdfviewer.PDFView
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         android:id="@+id/git_pdfView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pdf_progress_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar_pdf_viewer">
+
+    </com.github.barteksc.pdfviewer.PDFView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

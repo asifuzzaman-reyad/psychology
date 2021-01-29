@@ -1,4 +1,4 @@
-package com.reyad.psychology.register
+package com.reyad.psychology.register.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -40,7 +40,10 @@ class SignUp2 : AppCompatActivity() {
         mDatabase = FirebaseDatabase.getInstance()
 
         //
-        dialog = (SpotsDialog.Builder().setContext(this).build() as SpotsDialog?)!!
+        dialog = SpotsDialog.Builder().setContext(this)
+            .setMessage("Registration processing... ")
+            .setCancelable(false)
+            .build() as SpotsDialog
 
         // button sign up
         binding.btnSignUp2SignUp.setOnClickListener {
@@ -62,12 +65,6 @@ class SignUp2 : AppCompatActivity() {
 
         }
 
-        //button already
-        binding.btnSignUp2Already.setOnClickListener {
-            val loginIntent = Intent(this, Login::class.java)
-            startActivity(loginIntent)
-//            finish()
-        }
 
     }
 
@@ -83,6 +80,7 @@ class SignUp2 : AppCompatActivity() {
                     //get data from sign up1
                     val batch = intent.getStringExtra("batch").toString()
                     val id = intent.getStringExtra("id").toString()
+                    val blood = intent.getStringExtra("blood").toString()
                     val hall = intent.getStringExtra("hall").toString()
                     val mobile = intent.getStringExtra("mobile").toString()
 
@@ -102,11 +100,11 @@ class SignUp2 : AppCompatActivity() {
                     usersRef.child(currentUser).setValue(userHashMap)
 
                     /////////////////update Students Data /////////////////////////////////
-                    updateStudentsData(batch, id, hall, mobile)
+                    updateStudentsData(batch, id, blood, hall, mobile)
 
                     /////////////////// reset token ////////////////////////////////////////
                     val db = FirebaseDatabase.getInstance().getReference("Tokens").child(batch)
-                    val query = db.child(id).child("token").setValue("used")
+                    db.child(id).child("token").setValue("used")
 
                     //go to main activity
                     goToMainActivity()
@@ -126,10 +124,11 @@ class SignUp2 : AppCompatActivity() {
 
     //  update Students Data
     private fun updateStudentsData(
-        batch: String, id: String, hall: String, mobile: String
+        batch: String, id: String, blood:String,  hall: String, mobile: String
     ) {
         // user hashMap
         val userdata: MutableMap<String, Any> = HashMap()
+        userdata["blood"] = blood
         userdata["hall"] = hall
         userdata["mobile"] = mobile
 
@@ -138,6 +137,12 @@ class SignUp2 : AppCompatActivity() {
         studentRef.child(batch)
             .child(id)
             .updateChildren(userdata)
+            .addOnSuccessListener {
+                dialog.dismiss()
+            }.addOnFailureListener {
+                dialog.dismiss()
+                Toast.makeText(this, "error:${it.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     //  go To MainActivity

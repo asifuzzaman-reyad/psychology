@@ -5,16 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".dashboard.study.CourseList">
+    tools:context=".dashboard.study.allCourse.CourseCategory">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/liteWhite"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_header_course_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Course Category"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout7">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +67,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="100dp"
                     android:layout_margin="8dp"
                     app:cardBackgroundColor="#fff"
                     app:cardCornerRadius="8dp"
@@ -68,7 +91,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
@@ -116,7 +139,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="100dp"
                     android:layout_margin="8dp"
                     app:cardCornerRadius="8dp"
                     app:cardElevation="4dp">
@@ -139,7 +162,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="55dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="8dp"
@@ -159,81 +182,6 @@
                         android:focusable="true"
                         android:gravity="center"
                         android:text="@string/books"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:visibility="visible" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@string/teacher_s_slide"
-                    android:textColor="@android:color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:visibility="invisible" />
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_margin="8dp"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
-
-                    <TextView
-                        android:id="@+id/tv_teacher1_course_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:hint="@string/teacher_name1"
-                        android:textColor="@android:color/black"
-                        android:textSize="18sp"
-                        android:visibility="visible" />
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView_pdf_teacher2"
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:visibility="invisible"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp">
-
-                    <TextView
-                        android:id="@+id/tv_teacher2_course_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:hint="@string/teacher_name2"
                         android:textColor="@android:color/black"
                         android:textSize="18sp"
                         android:visibility="visible" />

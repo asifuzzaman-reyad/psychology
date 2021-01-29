@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.reyad.psychology.R
 import com.reyad.psychology.databinding.ActivitySignUp1Binding
+import com.reyad.psychology.register.login.SignUp2
 
 class SignUp1 : AppCompatActivity() {
 
@@ -139,7 +140,6 @@ class SignUp1 : AppCompatActivity() {
             }
 
         })
-
 
     }
 
