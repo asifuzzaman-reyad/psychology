@@ -6,12 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.reyad.psychology.databinding.FragmentTeacherPresentBinding
+
+private const val TAG = "teacherPresent"
 
 class TeacherPresent : Fragment(), TeacherAdapter.TeacherItemListener {
 
@@ -42,6 +45,9 @@ class TeacherPresent : Fragment(), TeacherAdapter.TeacherItemListener {
         val db = FirebaseDatabase.getInstance()
         val ref = db.getReference("Teacher").child("Present")
 
+        //firebase offline
+        ref.keepSynced(true)
+
         val items = ArrayList<TeacherItemList>()
 
         ref.addValueEventListener(object : ValueEventListener {
@@ -52,13 +58,14 @@ class TeacherPresent : Fragment(), TeacherAdapter.TeacherItemListener {
 
                     val adapter = TeacherAdapter(requireContext(), items, this@TeacherPresent)
                     binding.recyclerViewPresent.adapter = adapter
-                    Log.i("teacher", data.name)
+                    Log.i(TAG, data.name)
 
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.i(TAG, "$TAG error:${error.message} ")
+                Toast.makeText(context, "$TAG error:${error.message} ", Toast.LENGTH_SHORT).show()
             }
         })
     }

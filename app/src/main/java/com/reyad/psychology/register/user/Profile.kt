@@ -12,10 +12,6 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
-import com.google.zxing.common.BitMatrix
-import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.reyad.psychology.R
 import com.reyad.psychology.databinding.ActivityProfileBinding
 import com.reyad.psychology.register.login.FirstActivity
@@ -74,6 +70,9 @@ class Profile : AppCompatActivity() {
         val db = FirebaseDatabase.getInstance().getReference("Students")
         val ref = db.child(batch!!).child(id!!)
 
+        //firebase offline
+        ref.keepSynced(true)
+
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -112,9 +111,6 @@ class Profile : AppCompatActivity() {
                             })
                     }
 
-                    //
-                    //load bar code
-                    barcode(id.toString())
 
                 } else {
                     Toast.makeText(this@Profile, "Something wrong", Toast.LENGTH_SHORT).show()
@@ -169,29 +165,13 @@ class Profile : AppCompatActivity() {
             putExtra("batch", batch.toString())
             putExtra("id", id.toString())
             putExtra("name", name.toString())
+            putExtra("blood", blood.toString())
             putExtra("hall", hall.toString())
             putExtra("mobile", mobile.toString())
             putExtra("imageUrl", imageUrl.toString())
         }
 
         startActivity(editProfileIntent)
-    }
-
-    //bar code
-    private fun barcode(id: String) {
-        val multiFormatWriter = MultiFormatWriter()
-
-        val imageView = binding.idBarcode
-        try {
-            val bitMatrix: BitMatrix =
-                multiFormatWriter.encode(id, BarcodeFormat.CODE_128, 200, 50)
-            val barCodeEncoder = BarcodeEncoder()
-            val bitmap = barCodeEncoder.createBitmap(bitMatrix)
-            imageView.setImageBitmap(bitmap)
-
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 
 }

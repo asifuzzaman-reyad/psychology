@@ -28,7 +28,7 @@ class CourseChapterLesson : AppCompatActivity() {
         getCategory = intent?.getStringExtra("category").toString()
         getChapter = intent?.getStringExtra("chapter").toString()
 
-        val tvLesson = "$getCategory Details ($getCourseCode)"
+        val tvLesson = "$getCategory ($getCourseCode)"
         binding.tvHeaderChapterDetails.text = tvLesson
         Log.i(
             "courseDetails", " ${getCourseCode.toString()} ->> " +
@@ -57,6 +57,10 @@ class CourseChapterLesson : AppCompatActivity() {
                 .child(getYear!!)
                 .child(getCourseCode!!)
                 .child(getCategory!!)
+
+
+            //firebase offline
+            ref.keepSynced(true)
 
             ref.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -104,6 +108,10 @@ class CourseChapterLesson : AppCompatActivity() {
                 .child(getCategory!!)
                 .child(getChapter!!)
                 .orderByChild("serialNo")
+
+
+            //firebase offline
+            ref1.keepSynced(true)
 
             ref1.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {

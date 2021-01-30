@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".register.ProfileEdit">
+    tools:context=".register.user.ProfileEdit">
 
     <TextView
         android:id="@+id/textView8"
@@ -49,12 +49,10 @@
                 android:id="@+id/circular_edit_profile"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
-                android:layout_margin="16dp"
+                android:layout_margin="8dp"
                 android:src="@drawable/male_avatar"
                 app:civ_border_color="#65000000"
-                app:civ_border_width="1dp"
-                tools:layout_editor_absoluteX="91dp"
-                tools:layout_editor_absoluteY="16dp" />
+                app:civ_border_width="1dp" />
 
             <LinearLayout
                 android:id="@+id/linearLayout7"
@@ -82,24 +80,74 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--  mobile -->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til__Mobile_edit_profile"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:counterEnabled="true"
-                    app:endIconMode="clear_text">
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/tv_Mobile_edit_profile"
+                    <!--  mobile -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til__Mobile_edit_profile"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/mobile_no"
-                        android:inputType="number"
-                        android:maxLength="11" />
+                        app:counterEnabled="true"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        app:endIconMode="clear_text">
 
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/tv_Mobile_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/mobile_no"
+                            android:inputType="number"
+                            android:maxLength="11" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <!-- eitText student blood-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_blood_edit_profile"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="@string/blood_group"
+                        app:errorEnabled="true">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/ac_blood_edit_profile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:inputType="none"
+                            tools:ignore="LabelFor" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <!-- eitText student hall-->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_hall_edit_profile"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:hint="@string/hall"
+                    app:errorEnabled="true">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/ac_hall_edit_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/open_sans"
+                        android:inputType="none"
+                        tools:ignore="LabelFor" />
                 </com.google.android.material.textfield.TextInputLayout>
+
 
             </LinearLayout>
 

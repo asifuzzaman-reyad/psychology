@@ -23,23 +23,5 @@
         android:id="@+id/courseList"
         android:name="com.reyad.psychology.dashboard.study.allCourse.CourseCategory"
         android:label="fragment_course_list"
-        tools:layout="@layout/fragment_course_category" >
-        <action
-            android:id="@+id/action_courseList_to_courseChapterList"
-            app:destination="@id/courseChapterList" />
-    </fragment>
-    <fragment
-        android:id="@+id/courseDetails"
-        android:name="com.reyad.psychology.dashboard.study.CourseDetails"
-        android:label="fragment_course_details"
-        tools:layout="@layout/fragment_course_details" />
-    <fragment
-        android:id="@+id/courseChapterList"
-        android:name="com.reyad.psychology.CourseChapterList"
-        android:label="fragment_course_chapter_list"
-        tools:layout="@layout/fragment_course_chapter_list" >
-        <action
-            android:id="@+id/action_courseChapterList_to_courseDetails"
-            app:destination="@id/courseDetails" />
-    </fragment>
+        tools:layout="@layout/fragment_course_category" />
 </navigation>

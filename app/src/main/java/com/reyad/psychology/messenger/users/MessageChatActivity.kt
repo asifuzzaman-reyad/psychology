@@ -25,7 +25,7 @@ class MessageChatActivity : AppCompatActivity() {
 
     val adapter = GroupAdapter<GroupieViewHolder>()
 
-    var notify = false
+    private var notify = false
     var apiService: APIService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

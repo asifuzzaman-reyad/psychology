@@ -51,6 +51,9 @@ class CourseChapter : AppCompatActivity() {
             .child(getCourseCode!!)
             .child(getCategory!!)
 
+        //firebase offline
+        ref.keepSynced(true)
+
         val mItems = ArrayList<CourseChapterList>()
 
         ref.addValueEventListener(object : ValueEventListener {

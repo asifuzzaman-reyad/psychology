@@ -7,7 +7,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.TextUtils
 import android.util.Log
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -34,6 +37,7 @@ class ProfileEdit : AppCompatActivity() {
     private var batch: String? = null
     private var id: String? = null
     private var name: String? = null
+    private var blood: String? = null
     private var hall: String? = null
     private var mobile: String? = null
     private var imageUrl: String? = null
@@ -45,6 +49,10 @@ class ProfileEdit : AppCompatActivity() {
         binding = ActivityProfileEditBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //
+        loadBloodGroup()
+        loadHall()
 
         // hooks
         mAuth = FirebaseAuth.getInstance()
@@ -61,6 +69,10 @@ class ProfileEdit : AppCompatActivity() {
         hall = intent.getStringExtra("hall").toString()
         mobile = intent.getStringExtra("mobile").toString()
         imageUrl = intent.getStringExtra("imageUrl").toString()
+
+        blood = intent.getStringExtra("blood").toString()
+        hall = intent.getStringExtra("hall").toString()
+
         Log.i("profileEdit", "$batch ->> $id ->> $name->> $hall ->> $mobile ->> $imageUrl")
 
         //
@@ -71,6 +83,7 @@ class ProfileEdit : AppCompatActivity() {
 
         binding.tvNameEditProfile.setText(name)
         binding.tvMobileEditProfile.setText(mobile)
+
 
         // pick image
         binding.circularEditProfile.setOnClickListener {
@@ -86,10 +99,9 @@ class ProfileEdit : AppCompatActivity() {
         // update
         binding.btnUpdateEditProfile.setOnClickListener {
             dialog.show()
-
             Handler(Looper.getMainLooper()).postDelayed({
                 studentInfoUpdateToFirebase()
-            }, 3000)
+            }, 1000)
         }
     }
 
@@ -166,15 +178,19 @@ class ProfileEdit : AppCompatActivity() {
 
         // firebase ref
         val db = FirebaseDatabase.getInstance().reference
-        db.child("Students")
+        val ref = db.child("Students")
             .child(batch.toString())
             .child(id.toString())
-            .updateChildren(imageHash).addOnCompleteListener {
-                dialog.dismiss()
-                Toast.makeText(
-                    this, "Image Upload: successfully", Toast.LENGTH_SHORT
-                ).show()
-            }
+
+        //firebase offline
+        ref.keepSynced(true)
+
+        ref.updateChildren(imageHash).addOnCompleteListener {
+            dialog.dismiss()
+            Toast.makeText(
+                this, "Image Upload: successfully", Toast.LENGTH_SHORT
+            ).show()
+        }
             .addOnFailureListener {
                 dialog.dismiss()
                 Log.i("editProfile", "Storage failed: ${it.message.toString()}")
@@ -191,30 +207,87 @@ class ProfileEdit : AppCompatActivity() {
             binding.tilMobileEditProfile.isErrorEnabled = true
 
         } else {
+
+            //
+            val bloodEdit: String = if (binding.acBloodEditProfile.text.toString().isEmpty()) {
+                blood.toString()
+            } else {
+                binding.acBloodEditProfile.text.toString()
+            }
+
+
+            val hallEdit: String = if (binding.acHallEditProfile.text.toString().isEmpty()) {
+                hall.toString()
+            } else {
+                binding.acHallEditProfile.text.toString()
+            }
+
+
             val dataHash: MutableMap<String, Any> = HashMap()
             dataHash["name"] = name
             dataHash["mobile"] = mobileNo
+            dataHash["blood"] = bloodEdit.toString()
+            dataHash["hall"] = hallEdit.toString()
 
             // firebase ref
             val db = FirebaseDatabase.getInstance().reference
-            db.child("Students")
+            val ref = db.child("Students")
                 .child(batch.toString())
                 .child(id.toString())
-                .updateChildren(dataHash).addOnCompleteListener {
-                    dialog.dismiss()
-                    Log.i("editProfile", "Profile Update: successfully")
 
-                    // go back to profile
-                    val profileIntent = Intent(this, MainActivity::class.java)
-                    profileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(profileIntent)
-                    finish()
-                }
+            //firebase offline
+            ref.keepSynced(true)
+
+            //
+            ref.updateChildren(dataHash).addOnCompleteListener {
+                dialog.dismiss()
+                Log.i("editProfile", "Profile Update: successfully")
+
+                // go back to profile
+//                    val profileIntent = Intent(this, MainActivity::class.java)
+//                    profileIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+//                    startActivity(profileIntent)
+//                    finish()
+            }
                 .addOnFailureListener {
                     dialog.dismiss()
                     Log.i("editProfile", "Profile Update: ${it.message.toString()}")
                 }
         }
+    }
+
+    // autoComplete blood
+    private fun loadBloodGroup() {
+        //list
+        val bloodGrList = listOf(
+            "O+",
+            "O-",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-"
+        )
+        //array adapter
+        val adapterBlood = ArrayAdapter(this, R.layout.material_spinner_item, bloodGrList)
+        (binding.acBloodEditProfile as AutoCompleteTextView?)?.setAdapter(adapterBlood)
+    }
+
+    // autoComplete hall
+    private fun loadHall() {
+        //list
+        val hallList = listOf(
+            "Shaheed Abdur Rab Hall",
+            "Pritilata Hall",
+            "Shamsun Nahar Hall",
+            "Jononetri Sheikh Hasina Hall",
+            "Deshnetri Begum Khaleda Zia Hall",
+            "Bangamata Sheikh Fazilatunnesa Mujib Hall"
+        )
+        //array adapter
+        val adapterHall = ArrayAdapter(this, R.layout.material_spinner_item, hallList)
+        (binding.acHallEditProfile as AutoCompleteTextView?)?.setAdapter(adapterHall)
     }
 }
 

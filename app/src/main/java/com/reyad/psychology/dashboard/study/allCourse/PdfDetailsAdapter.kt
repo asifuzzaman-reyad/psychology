@@ -38,10 +38,11 @@ class PdfDetailsAdapter(
 
         val mListPosition = mList[position]
         val lessonNo = mListPosition.lessonName
+        val source = mListPosition.source
         val link = mListPosition.fileUrl
 
         holder.textViewLessonName.text = lessonNo
-        holder.textViewLessonSource.text = mListPosition.source
+        holder.textViewLessonSource.text = source
 
 
         holder.buttonView.setOnClickListener {
@@ -53,12 +54,13 @@ class PdfDetailsAdapter(
 
         holder.buttonDownload.setOnClickListener {
             Toast.makeText(context, "Start Downloading...", Toast.LENGTH_SHORT).show()
+
             val request = DownloadManager.Request(Uri.parse(link))
             request.setTitle(lessonNo)
             request.setDescription("Downloading $lessonNo")
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             request.allowScanningByMediaScanner()
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, lessonNo)
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "$lessonNo-$source.pdf")
             val manager = context.getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
             manager.enqueue(request)
         }

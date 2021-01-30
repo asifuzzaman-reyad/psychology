@@ -48,11 +48,7 @@ class FragmentHome : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
 
-        dialog = SpotsDialog.Builder().setContext(context)
-            .setCancelable(false)
-            .setMessage("loading user info.")
-            .build() as SpotsDialog
-        dialog.show()
+        retrieveFirebaseAuth()
 
         // button profile
         binding.civProfileHome.setOnClickListener {
@@ -64,11 +60,21 @@ class FragmentHome : Fragment() {
             startActivity(profileIntent)
         }
 
+        // button teacher
+        binding.btnTeacherHome.setOnClickListener {
+            val teacherMainIntent = Intent(requireContext(), TeacherMain::class.java)
+            startActivity(teacherMainIntent)
+        }
 
         // button student
         binding.btnStudentHome.setOnClickListener {
             val studentIntent = Intent(requireContext(), StudentMain::class.java)
             startActivity(studentIntent)
+        }
+
+        // button teacher
+        binding.btnRoutineHome.setOnClickListener {
+            Toast.makeText(context, "Update coming soon...", Toast.LENGTH_SHORT).show()
         }
 
         // button messenger
@@ -77,19 +83,9 @@ class FragmentHome : Fragment() {
             startActivity(messengerIntent)
         }
 
-        // button teacher
-        binding.btnTeacherHome.setOnClickListener {
-            val teacherMainIntent = Intent(requireContext(), TeacherMain::class.java)
-            startActivity(teacherMainIntent)
-        }
+
 
         return view
-    }
-
-    // firebase auth -> on start
-    override fun onStart() {
-        super.onStart()
-        retrieveFirebaseAuth()
     }
 
     // retrieve auth data
@@ -154,13 +150,11 @@ class FragmentHome : Fragment() {
 
                         })
 
-                    dialog.dismiss()
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(context, "Error: ${error.message}", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
             }
 
         })
