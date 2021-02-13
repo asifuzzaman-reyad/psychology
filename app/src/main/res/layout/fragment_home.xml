@@ -11,15 +11,15 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:cardBackgroundColor="#96E8F3"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -69,52 +69,70 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!-- button teacher-->
-    <Button
-        android:id="@+id/btn_teacher_home"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:text="Teacher"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_student_home"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-    <!-- button student-->
-    <Button
-        android:id="@+id/btn_student_home"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="16dp"
-        android:text="Student"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_teacher_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btn_teacher_home"
-        app:layout_constraintTop_toTopOf="@+id/btn_teacher_home" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="8dp"
+            android:orientation="vertical"
+            android:padding="8dp">
 
-    <!-- button messenger-->
-    <Button
-        android:id="@+id/btn_messenger_home"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_margin="16dp"
-        android:text="messenger"
-        app:layout_constraintEnd_toEndOf="@+id/btn_student_home"
-        app:layout_constraintStart_toStartOf="@+id/btn_student_home"
-        app:layout_constraintTop_toBottomOf="@+id/btn_student_home" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <!-- button student-->
-    <Button
-        android:id="@+id/btn_routine_home"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:text="routine"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/btn_teacher_home"
-        app:layout_constraintStart_toStartOf="@+id/btn_teacher_home"
-        app:layout_constraintTop_toBottomOf="@+id/btn_teacher_home" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_teacher_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    app:cornerRadius="8dp"
+                    android:text="Teacher" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_student_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="8dp"
+                    app:cornerRadius="8dp"
+                    android:layout_weight="1"
+                    android:text="Student" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_messenger_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    app:cornerRadius="8dp"
+                    android:text="messenger" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_routine_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    app:cornerRadius="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:text="routine" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

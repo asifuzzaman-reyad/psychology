@@ -8,396 +8,412 @@
     android:background="#00FFEB3B"
     tools:context=".dashboard.study.FragmentStudy">
 
+
+    <!--    all course-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="#96E8F3"
+        app:cardCornerRadius="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_black"
+                    android:text="@string/all_course"
+                    android:textColor="@android:color/black"
+                    android:textSize="23sp" />
+
+                <TextView
+                    android:id="@+id/tv_study_batch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/muli_semibold"
+                    android:text="Current Batch" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/const_course_study"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:paddingBottom="8dp"
-            android:visibility="visible"
+            android:layout_gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!--    all course-->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/constraintLayout2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:cardBackgroundColor="#96E8F3"
-                app:cardCornerRadius="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout_editor_absoluteX="8dp">
+
+                <!--    1st linear layout-->
                 <LinearLayout
+                    android:id="@+id/linearLayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal"
-                    android:paddingTop="12dp"
-                    android:paddingBottom="12dp"
-                    android:paddingEnd="16dp"
-                    >
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView1"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/all_course"
-                        android:fontFamily="@font/muli_black"
-                        android:textColor="@android:color/black"
-                        android:textSize="24sp" />
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
 
-                    <TextView
-                        android:id="@+id/tv_study_batch"
-                        android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/ln_01"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="@dimen/course_img"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_baseline_menu_book_24" />
+
+                            <TextView
+                                android:id="@+id/tv_study_code1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@android:color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_study_name1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textAlignment="center"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!--card 2 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/aclonica"
-                        android:textColor="@color/purple_500"
-                        android:text="@string/batch"
-                        android:textSize="20sp" />
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:id="@+id/ln_02"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="@dimen/course_img"
+                                android:paddingStart="8dp"
+                                android:paddingEnd="8dp"
+                                android:src="@drawable/ic_baseline_menu_book_24" />
+
+                            <TextView
+                                android:id="@+id/tv_study_code2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@android:color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_study_name2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textAlignment="center"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
 
-            </androidx.cardview.widget.CardView>
-
-            <!--    1st linear layout-->
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView1"
-                    android:layout_width="0dp"
+                <!--    2nd linear layout-->
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#97F1EE"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp">
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
 
-                    <LinearLayout
-                        android:id="@+id/ln_01"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
 
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="@dimen/course_img"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_baseline_menu_book_24" />
+                        <LinearLayout
+                            android:id="@+id/ln_03"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_study_code1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="@android:color/black" />
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="@dimen/course_img"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_baseline_menu_book_24" />
 
-                        <TextView
-                            android:id="@+id/tv_study_name1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textAlignment="center"
-                            android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/tv_study_code3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@android:color/black" />
 
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/tv_study_name3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textAlignment="center"
+                                android:textSize="12sp" />
 
-                <!--card 2 -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView2"
-                    android:layout_width="0dp"
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!--card 4 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <LinearLayout
+                            android:id="@+id/ln_04"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="@dimen/course_img"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_baseline_menu_book_24" />
+
+                            <TextView
+                                android:id="@+id/tv_study_code4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@android:color/black" />
+
+                            <TextView
+                                android:id="@+id/tv_study_name4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textAlignment="center"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <!--    3rd linear layout-->
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#F3D099"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp">
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
-                    <LinearLayout
-                        android:id="@+id/ln_02"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
 
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="@dimen/course_img"
-                            android:paddingStart="8dp"
-                            android:paddingEnd="8dp"
-                            android:src="@drawable/ic_baseline_menu_book_24" />
+                        <LinearLayout
+                            android:id="@+id/ln_05"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_study_code2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="@android:color/black" />
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="@dimen/course_img"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_baseline_menu_book_24" />
 
-                        <TextView
-                            android:id="@+id/tv_study_name2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textAlignment="center"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                            <TextView
+                                android:id="@+id/tv_study_code5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@android:color/black" />
 
-                </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/tv_study_name5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textAlignment="center"
+                                android:textSize="12sp" />
 
-            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
 
-            <!--    2nd linear layout-->
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#D8C2AF"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:id="@+id/ln_03"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                    <!--card 6 -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:layout_weight="1"
+                        app:cardCornerRadius="4dp"
+                        app:cardElevation="4dp">
 
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="@dimen/course_img"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_baseline_menu_book_24" />
+                        <LinearLayout
+                            android:id="@+id/ln_06"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="8dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_study_code3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="@android:color/black" />
+                            <ImageView
+                                android:layout_width="70dp"
+                                android:layout_height="@dimen/course_img"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_baseline_menu_book_24" />
 
-                        <TextView
-                            android:id="@+id/tv_study_name3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textAlignment="center"
-                            android:textSize="12sp" />
+                            <TextView
+                                android:id="@+id/tv_study_code6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textColor="@android:color/black" />
 
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                            <TextView
+                                android:id="@+id/tv_study_name6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                android:fontFamily="@font/open_sans"
+                                android:textAlignment="center"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
-                <!--card 4 -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView4"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#EDA1A1"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp"
-                    app:layout_constraintEnd_toEndOf="parent">
+                    </androidx.cardview.widget.CardView>
 
-                    <LinearLayout
-                        android:id="@+id/ln_04"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="@dimen/course_img"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_baseline_menu_book_24" />
-
-                        <TextView
-                            android:id="@+id/tv_study_code4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="@android:color/black" />
-
-                        <TextView
-                            android:id="@+id/tv_study_name4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textAlignment="center"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <!--    3rd linear layout-->
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView5"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#BCADE8"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:id="@+id/ln_05"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="@dimen/course_img"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_baseline_menu_book_24" />
-
-                        <TextView
-                            android:id="@+id/tv_study_code5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="@android:color/black" />
-
-                        <TextView
-                            android:id="@+id/tv_study_name5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textAlignment="center"
-                            android:textSize="12sp" />
-
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!--card 6 -->
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView6"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    app:cardBackgroundColor="#A4E4B4"
-                    app:cardCornerRadius="4dp"
-                    app:cardElevation="4dp">
-
-                    <LinearLayout
-                        android:id="@+id/ln_06"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="8dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="@dimen/course_img"
-                            android:padding="4dp"
-                            android:src="@drawable/ic_baseline_menu_book_24" />
-
-                        <TextView
-                            android:id="@+id/tv_study_code6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textColor="@android:color/black" />
-
-                        <TextView
-                            android:id="@+id/tv_study_name6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
-                            android:fontFamily="@font/open_sans"
-                            android:textAlignment="center"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
             </LinearLayout>
 

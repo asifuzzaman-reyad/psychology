@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +25,8 @@ class Batch13 : Fragment() {
     private lateinit var _binding: FragmentBatch13Binding
     private val binding get() = _binding
 
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,7 +35,16 @@ class Batch13 : Fragment() {
         _binding = FragmentBatch13Binding.inflate(inflater, container, false)
         val view = binding.root
 
+        //
+        progressBar = binding.progressBarBatch13
+
+        //
         retrieveBatch13()
+
+        //
+        binding.swipeRefreshBatch13.setOnRefreshListener {
+            retrieveBatch13()
+        }
 
         return view
     }
@@ -60,11 +72,15 @@ class Batch13 : Fragment() {
                     recyclerView.adapter = adapter
 
                     Log.i("batch13", data.name)
+                    binding.swipeRefreshBatch13.isRefreshing = false
+                    progressBar.visibility = View.GONE
 
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
+                binding.swipeRefreshBatch13.isRefreshing = false
+                progressBar.visibility = View.GONE
                 Log.i(TAG, "$TAG error:${error.message} ")
                 Toast.makeText(context, "$TAG error:${error.message} ", Toast.LENGTH_SHORT).show()
             }

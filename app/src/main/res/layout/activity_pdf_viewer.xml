@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/liteWhite"
+        android:gravity="center_vertical"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center_vertical"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -45,28 +45,26 @@
         app:layout_constraintStart_toStartOf="@+id/appBarLayout4"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout4" />
 
-    <TextView
-        android:id="@+id/pdf_progress_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:hint="process"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar_pdf_viewer" />
-
-    <com.github.barteksc.pdfviewer.PDFView
-        android:id="@+id/git_pdfView"
-        android:layout_width="0dp"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_pdf_viewer"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar_pdf_viewer">
 
-    </com.github.barteksc.pdfviewer.PDFView>
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/git_pdfView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp">
+
+        </com.github.barteksc.pdfviewer.PDFView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

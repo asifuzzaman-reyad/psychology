@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.reyad.psychology.R
+import com.reyad.psychology.dashboard.home.student.BatchCurrent
 import com.reyad.psychology.dashboard.home.student.StudentMain
 import com.reyad.psychology.dashboard.home.teacher.TeacherMain
 import com.reyad.psychology.databinding.FragmentHomeBinding
@@ -68,8 +69,10 @@ class FragmentHome : Fragment() {
 
         // button student
         binding.btnStudentHome.setOnClickListener {
-            val studentIntent = Intent(requireContext(), StudentMain::class.java)
-            startActivity(studentIntent)
+            val intentBatchCurrent = Intent(requireContext(), BatchCurrent::class.java).apply {
+                putExtra("batch", batch)
+            }
+            startActivity(intentBatchCurrent)
         }
 
         // button teacher
@@ -79,7 +82,12 @@ class FragmentHome : Fragment() {
 
         // button messenger
         binding.btnMessengerHome.setOnClickListener {
-            val messengerIntent = Intent(requireContext(), Messenger::class.java)
+            val messengerIntent = Intent(requireContext(), Messenger::class.java).apply {
+                putExtra("batch", batch)
+                putExtra("id", id)
+                putExtra("name", name)
+                putExtra("imageUrl", imageUrl)
+            }
             startActivity(messengerIntent)
         }
 
@@ -135,7 +143,7 @@ class FragmentHome : Fragment() {
                 Log.i(TAG, "hall: ${hall.toString()}")
                 Log.i(TAG, "imageUrl: ${imageUrl.toString()}")
 
-
+                //
                 if (imageUrl!!.isNotEmpty()) {
                     Picasso.get().load(imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
                         .placeholder(R.drawable.male_avatar)
@@ -147,10 +155,9 @@ class FragmentHome : Fragment() {
                                 Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
                                     .into(binding.civProfileHome)
                             }
-
                         })
-
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {

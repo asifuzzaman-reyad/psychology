@@ -6,7 +6,8 @@ data class StudentItemList(
     val session: String,
     val blood: String,
     val hall: String,
+    val mobile: String,
     val imageUrl: String,
 ) {
-    constructor() : this( "", "", "", "", "", "")
+    constructor() : this( "", "", "", "", "", "", "")
 }

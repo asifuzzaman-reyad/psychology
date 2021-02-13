@@ -11,6 +11,8 @@ import com.google.firebase.database.*
 import com.reyad.psychology.R
 import com.reyad.psychology.databinding.ActivityMessageChatBinding
 import com.reyad.psychology.notification.*
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.Item
@@ -33,6 +35,9 @@ class MessageChatActivity : AppCompatActivity() {
         binding = ActivityMessageChatBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //
+        retrieveToUSerInfo()
 
         // recycler adapter
         binding.recyclerViewChatMessage.setHasFixedSize(true)
@@ -133,10 +138,8 @@ class MessageChatActivity : AppCompatActivity() {
 
     // retrieve Message
     private fun retrieveMessage() {
-        val userId = intent.getStringExtra("userId")
-        val toId = userId.toString()
+        val toId = intent.getStringExtra("userId").toString()
         val fromId = FirebaseAuth.getInstance().uid
-
 
         val chatDatabaseRef =
             FirebaseDatabase.getInstance().getReference("/user_messages/$fromId/$toId")
@@ -179,11 +182,7 @@ class MessageChatActivity : AppCompatActivity() {
 
 
     // push notification
-    private fun sendNotification(
-        receiveId: String,
-        senderId: String,
-        userName: String?,
-        message: String
+    private fun sendNotification(receiveId: String, senderId: String, userName: String?, message: String
     ) {
         val ref = FirebaseDatabase.getInstance().reference.child("tokens")
 
@@ -210,11 +209,7 @@ class MessageChatActivity : AppCompatActivity() {
                                 if (response.code() == 200) {
                                     if (response.body()!!.success != 1) {
                                         Toast.makeText(
-                                            this@MessageChatActivity,
-                                            " Notification Failed",
-                                            Toast.LENGTH_SHORT
-                                        )
-                                            .show()
+                                            this@MessageChatActivity, " Notification Failed", Toast.LENGTH_SHORT).show()
                                     }
                                 }
                             }
@@ -233,6 +228,90 @@ class MessageChatActivity : AppCompatActivity() {
 
         })
 
+    }
+
+
+    //
+    private fun retrieveToUSerInfo() {
+        val toId = intent.getStringExtra("userId").toString()
+
+        //database
+        val db = FirebaseDatabase.getInstance().reference
+        val userRef = db.child("Users").child(toId)
+
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val batchToUser = snapshot.child("batch").value.toString()
+                val idToUser = snapshot.child("id").value.toString()
+
+                Log.i(TAG, "batch ---> $batchToUser :: id ---> $idToUser")
+
+                // get student data
+                getToUserRef(batchToUser, idToUser)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(
+                    this@MessageChatActivity,
+                    "Error: ${error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        })
+    }
+
+    // student
+    private fun getToUserRef(batch: String, id: String) {
+        val db = FirebaseDatabase.getInstance().reference
+        val studentRef = db.child("Students")
+            .child(batch)
+            .child(id)
+
+        studentRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val name = snapshot.child("name").value.toString()
+                val hall = snapshot.child("hall").value.toString()
+                val mobileNo = snapshot.child("mobile").value.toString()
+                val imageUrl = snapshot.child("imageUrl").value.toString()
+
+                Log.i(TAG, "hall: ${hall.toString()}")
+                Log.i(TAG, "imageUrl: ${imageUrl.toString()}")
+
+                // toUser name
+                binding.tvNameMessageChat.text = name
+
+                // profile image -> to user
+                if (imageUrl.isNotEmpty()) {
+                    Picasso.get().load(imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
+                        .placeholder(R.drawable.male_avatar)
+                        .into(
+                            binding.civProfileMessageChat,
+                            object : com.squareup.picasso.Callback {
+                                override fun onSuccess() {
+                                }
+
+                                override fun onError(e: java.lang.Exception?) {
+                                    Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
+                                        .into(binding.civProfileMessageChat)
+                                }
+
+                            })
+
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(
+                    this@MessageChatActivity,
+                    "Error: ${error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+        })
     }
 
 }

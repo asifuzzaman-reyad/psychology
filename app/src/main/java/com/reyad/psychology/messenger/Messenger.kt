@@ -8,8 +8,13 @@ import android.os.Bundle
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textfield.TextInputLayout
+import com.reyad.psychology.R
 import com.reyad.psychology.databinding.ActivityMessengerBinding
 import com.reyad.psychology.messenger.users.AllUser
+import com.reyad.psychology.register.user.Profile
+import com.squareup.picasso.Callback
+import com.squareup.picasso.NetworkPolicy
+import com.squareup.picasso.Picasso
 
 class Messenger : AppCompatActivity() {
 
@@ -23,6 +28,42 @@ class Messenger : AppCompatActivity() {
         binding = ActivityMessengerBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        //
+        val batch  = intent.getStringExtra("batch").toString()
+        val id  = intent.getStringExtra("id").toString()
+        val name  = intent.getStringExtra("name").toString()
+        val imageUrl  = intent.getStringExtra("imageUrl").toString()
+
+        //
+        binding.tvNameMessenger.text = name
+
+        //
+        if (imageUrl.isNotEmpty()) {
+            Picasso.get().load(imageUrl).networkPolicy(NetworkPolicy.OFFLINE)
+                .placeholder(R.drawable.male_avatar)
+                .into(binding.civProfileMessenger, object : Callback {
+                    override fun onSuccess() {
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        Picasso.get().load(imageUrl).placeholder(R.drawable.male_avatar)
+                            .into(binding.civProfileMessenger)
+                    }
+                })
+        }
+
+        //
+
+        // button profile
+        binding.civProfileMessenger.setOnClickListener {
+
+            val profileIntent = Intent(this, Profile::class.java).apply {
+                putExtra("batch", batch.toString())
+                putExtra("id", id.toString())
+            }
+            startActivity(profileIntent)
+        }
 
         //hooks
         viewPager = binding.viewPagerMessenger

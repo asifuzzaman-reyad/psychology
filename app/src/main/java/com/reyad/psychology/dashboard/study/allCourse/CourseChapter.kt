@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.reyad.psychology.databinding.ActivityCourseChapterBinding
 
 class CourseChapter : AppCompatActivity() {
@@ -97,6 +94,5 @@ class CourseChapter : AppCompatActivity() {
         })
 
     }
-
-
+    
 }

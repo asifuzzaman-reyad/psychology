@@ -25,6 +25,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             app:tabMode="scrollable"
+            android:background="@color/liteWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.appbar.AppBarLayout>

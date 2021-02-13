@@ -27,11 +27,7 @@ import java.io.File
 class PdfViewerActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPdfViewerBinding
 
-    private var imageName: String? = null
     private var link: String? = null
-
-    private var i: Int = 0
-    private val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +43,20 @@ class PdfViewerActivity : AppCompatActivity() {
         link = intent.getStringExtra("pdfLink")
         Log.i("link", link!!)
 
-        loadProgressBar()
-
         //
         loadPdf(link)
+
+        //
+        binding.swipeRefreshPdfViewer.setOnRefreshListener {
+            //
+            loadPdf(link)
+        }
     }
 
     //
     private fun loadPdf(url: String?) {
+        binding.progressBarPdfViewer.visibility = View.VISIBLE
+
         FileLoader.with(applicationContext)
             .load(url, false)
             .fromDirectory("pdfFile", FileLoader.DIR_INTERNAL)
@@ -64,7 +66,6 @@ class PdfViewerActivity : AppCompatActivity() {
                     response: FileResponse<File>?
                 ) {
                     binding.progressBarPdfViewer.visibility = View.GONE    //hide progress bar
-                    binding.pdfProgressTv.visibility = View.GONE
 
                     val pdfFile: File = response!!.body
 
@@ -92,41 +93,17 @@ class PdfViewerActivity : AppCompatActivity() {
                         .enableAnnotationRendering(true)
                         .invalidPageColor(Color.RED)
                         .load()
+
+                    binding.swipeRefreshPdfViewer.isRefreshing = false
                 }
 
                 override fun onError(request: FileLoadRequest?, t: Throwable?) {
                     Toast.makeText(applicationContext, "" + t?.message, Toast.LENGTH_SHORT).show()
 
                     binding.progressBarPdfViewer.visibility = View.GONE   //hide progress bar
-                    binding.pdfProgressTv.visibility = View.GONE
+                    binding.swipeRefreshPdfViewer.isRefreshing = false
                 }
             })
-    }
-
-    //
-    @SuppressLint("SetTextI18n")
-    fun loadProgressBar() {
-        binding.progressBarPdfViewer.visibility = View.VISIBLE
-        binding.pdfProgressTv.visibility = View.VISIBLE
-
-        i = binding.progressBarPdfViewer.progress
-
-        Thread {
-            while (i < 100) {
-                i += 4
-                // Update the progress bar and display the current value
-                handler.post {
-                    binding.progressBarPdfViewer.progress = i
-                    binding.pdfProgressTv.text =
-                        i.toString() + "/" + binding.progressBarPdfViewer.max
-                }
-                try {
-                    Thread.sleep(500)
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-            }
-        }.start()
     }
 
     // runtime permission

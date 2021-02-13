@@ -37,11 +37,17 @@ class AllUserAdapter(
         holder.textViewId.text = userItems.id
 
         when (userItems.batch) {
-            "Batch 14" -> {
+            "Batch 15" -> {
                 holder.imageViewBadge.setBackgroundColor(Color.RED)
             }
-            "Batch 13" -> {
+            "Batch 14" -> {
                 holder.imageViewBadge.setBackgroundColor(Color.GREEN)
+            }
+            "Batch 13" -> {
+                holder.imageViewBadge.setBackgroundColor(Color.BLUE)
+            }
+            "Batch 12" -> {
+                holder.imageViewBadge.setBackgroundColor(Color.YELLOW)
             }
         }
 

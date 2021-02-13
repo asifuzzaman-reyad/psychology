@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +24,8 @@ class Batch15 : Fragment() {
     private lateinit var _binding: FragmentBatch15Binding
     private val binding get() = _binding
 
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,8 +33,15 @@ class Batch15 : Fragment() {
         _binding = FragmentBatch15Binding.inflate(inflater, container, false)
         val view = binding.root
 
+        //
+        progressBar = binding.progressBarBatch15
 
         retrieveBatch15()
+
+        //
+        binding.swipeRefreshBatch15.setOnRefreshListener {
+            retrieveBatch15()
+        }
 
         return view
     }
@@ -60,14 +70,20 @@ class Batch15 : Fragment() {
                         recyclerView.adapter = adapter
 
                         Log.i("batch15", data.name)
+                        binding.swipeRefreshBatch15.isRefreshing = false
+                        progressBar.visibility = View.GONE
                     }
 
-                }else{
-                    binding.tvNoDataBatch15.visibility =View.VISIBLE
+                } else {
+                    binding.tvNoDataBatch15.visibility = View.VISIBLE
+                    binding.swipeRefreshBatch15.isRefreshing = false
+                    progressBar.visibility = View.GONE
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
+                binding.swipeRefreshBatch15.isRefreshing = false
+                progressBar.visibility = View.GONE
                 Log.i(TAG, "$TAG error:${error.message} ")
                 Toast.makeText(context, "$TAG error:${error.message} ", Toast.LENGTH_SHORT).show()
             }
